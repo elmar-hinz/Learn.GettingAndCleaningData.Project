@@ -11,7 +11,7 @@
 ######################################################################
 
 ######################################################################
-# Setup
+# Configuration
 ######################################################################
 
 # Do a fullrun including download from remote or local
@@ -33,13 +33,18 @@ traindir <- "data/UciHarDataset/train"
 testdir <- "data/UciHarDataset/test"
 
 ######################################################################
-# Create Analyser object
+# Create analyser object
 #
-# Make the methods public available via a list for testing purposes.
+# @return list - list with accessor functions
 ######################################################################
 
 Analyser <- function() {
 
+    ##################################################
+    # Constructor
+    #
+    # @return list - list with accessor functions
+    ##
     construct <- function() {
         list(
             main = main,
@@ -51,6 +56,13 @@ Analyser <- function() {
          )
     }
 
+    ##################################################
+    # Main functions
+    #
+    # Controlls the full process.
+    #
+    # @return NULL
+    ##
     main <- function() {
         cleanup()
         setup()
@@ -60,6 +72,13 @@ Analyser <- function() {
         NULL
     }
 
+    ##################################################
+    # Cleanup
+    #
+    # Cleans everything up to prepare a full run if `fullrun` is TRUE.
+    #
+    # @return NULL
+    ##
     cleanup <- function() {
         if(fullrun) {
             if(file.exists(unpackdir)) unlink(unpackdir, recursive = T)
@@ -68,19 +87,46 @@ Analyser <- function() {
         NULL
     }
 
+    ##################################################
+    # Setup
+    #
+    # Creates the workspace directories.
+    #
+    # @return NULL
+    ##
     setup <- function() {
         if(!dir.exists(datadir)) dir.create(datadir)
         if(!dir.exists(unpackdir)) dir.create(unpackdir)
         NULL
     }
 
+    ##################################################
+    # Download
+    #
+    # Downloads the raw data as a Zip file if the Zip file
+    # doesn't exist after a clean up.
+    #
+    # If `download_from_local` is TRUE it downloads
+    # from a local copy of the zip file else from remote.
+    #
+    # @return NULL
+    ##
     download <- function() {
-        if(download_from_local) url <- localurl else url <- remoteurl
-        if(!file.exists(zipfile))
+        if(!file.exists(zipfile)) {
+            if(download_from_local) url <- localurl else url <- remoteurl
             download.file(url = url, destfile = zipfile, method = "auto")
+        }
         NULL
     }
 
+    ##################################################
+    # Unpack
+    #
+    # Unpacks the raw data from Zipfile if the raw
+    # data directory doesn't exist after a clean up.
+    #
+    # @return NULL
+    ##
     unpack <- function() {
         if(!dir.exists(rawdir)) {
             unzip(zipfile = zipfile, exdir = unpackdir)
@@ -113,6 +159,7 @@ Analyser <- function() {
         files
     }
 
+    # Finally call the contructor function and return the object list
     construct()
 }
 
