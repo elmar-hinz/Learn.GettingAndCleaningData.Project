@@ -10,6 +10,8 @@
 #                                                                    #
 ######################################################################
 
+require(stringr)
+
 ######################################################################
 # Configuration
 ######################################################################
@@ -40,6 +42,10 @@ testdir <- "data/UciHarDataset/test"
 
 Analyser <- function() {
 
+    trains <- NULL
+    tests <- NULL
+    map <- NULL
+
     ##################################################
     # Constructor
     #
@@ -47,12 +53,17 @@ Analyser <- function() {
     ##
     construct <- function() {
         list(
-            main = main,
             setup = setup,
             download = download,
             unpack = unpack,
-            combine_train_and_test = combine_train_and_test,
-            cleanup = cleanup
+            read = read,
+            raw_report = raw_report,
+            cleanup = cleanup,
+            make_match_map = make_match_map,
+            read_group = read_group,
+            make_key = make_key,
+            raw_report = raw_report,
+            main = main
          )
     }
 
@@ -68,7 +79,9 @@ Analyser <- function() {
         setup()
         download()
         unpack()
-        # combine_train_and_test()
+        read()
+        raw_report()
+        combine()
         NULL
     }
 
@@ -141,22 +154,117 @@ Analyser <- function() {
         NULL
     }
 
-    combine_train_and_test <- function() {
-        trains <- read_all_files(traindir)
-        tests <- read_all_files(traindir)
-        for(t in c(trains, tests)) { print(summary(t)) }
+    read <- function() {
+        trains <<- read_group(traindir)
+        tests <<- read_group(testdir)
+        map <<- make_match_map(names(trains), names(tests))
+    }
+
+    xxx <- function() {
+        triples <- make_match_map(
+          names(trains), names(tests), c('train', 'test', 'combi'))
+        combis <- list()
+        for ( triple in triples ) {
+            combis[triple[3]]
+        }
         NULL
     }
 
-    read_all_files <- function(dir) {
+    ##################################################
+    # Read files from train or test group
+    #
+    # Reads by `read.table` and returns a list of
+    # data frames. The files basename without postfix
+    # goes into each key of the list.
+    #
+    # @param character - path to the groups directory
+    # @return list - list of dataframes
+    ##
+    read_group <- function(dir) {
         files <- list()
         pathes <- list.files(dir, recursive = F, full.names = T)
         for(path in pathes) {
             if(!file.info(path)$isdir) {
-                files[[path]] <- read.table(path)
+                name <- basename(path)
+                name <- strsplit(name, split = '.', fixed = T)[[1]][1]
+                files[[name]] <- read.table(path)
             }
         }
         files
+    }
+
+    ##################################################
+    # Check two lists of given file pathes and pair them
+    #
+    # Example:
+    #      data/train/X_train.txt matches data/test/X_test.txt
+    #      The differing patterns are "train" vs "test".
+    #
+    # * Inputs two lists of file pathes that differ by pattern.
+    # * Inspects the file names and matches them as pairs.
+    # * Checks that nothing is in excess or missing.
+    # * Creates a common key for matching files.
+    # * This keys are extracted from the file names.
+    # * Returns a list: keys and paired file pathes.
+    #
+    # @param charater - vector of train files
+    # @param charater - vector of test files
+    # @param charater - patterns, defaults to c(train, test)
+    # @return list - char keys, char vectors of lenght 2
+    ##
+    make_match_map <-
+        function(firsts, seconds, patterns = c('train', 'test')) {
+        # initial checks
+        if(length(firsts) >  length(unique(firsts)))
+            stop("elements in firsts are not unique")
+        if(length(seconds) > length(unique(seconds)))
+            stop("elements in seconds are not unique")
+        if(length(firsts) != length(seconds))
+            stop("elements in firsts and seconds don't have equal length")
+        # try to match
+        heap <- seconds
+        out <- list()
+        for(candidate in firsts) {
+            key <- make_key(candidate, patterns[1])
+            if(key %in% names(out)) {
+                msg <- 'filename "%s" and it\'s key "%s" are not unique'
+                stop(sprintf(msg, candidate, key))
+            }
+            needle <- str_replace_all(candidate, patterns[1], patterns[2])
+            if(!(needle %in% heap)) {
+                msg <- 'missing element "%s" in seconds "%s"\n'
+                stop(sprintf(msg, needle[1], heap[1]))
+            } else {
+                heap <- heap[-(match(needle, heap))]
+                out[[key]] <- c(candidate, needle)
+            }
+        }
+        out[sort(names(out))]
+    }
+
+    ##################################################
+    # Make a key from a file path
+    #
+    # "data/X_train.txt" results in "X_" for "train"
+    #
+    # * directories are stripped
+    # * file ending is stripped
+    # * pattern is stripped
+    #
+    # @param character - file path
+    # @param character - pattern to remove
+    # @return character - the generated key
+    ##
+    make_key <- function(filepath, pattern_to_remove) {
+        basename <- basename(filepath)
+        key <- strsplit(basename, split = ".", fixed = T)[[1]][1]
+        str_replace(key, pattern_to_remove, "")
+    }
+
+    ##################################################
+    # Analyse import files
+    ##
+    raw_report <- function() {
     }
 
     # Finally call the contructor function and return the object list
