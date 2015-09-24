@@ -36,7 +36,7 @@ test.configuration <- function() {
     checkTrue(is.character(c(
         localurl, remoteurl,
         unpackdir, datadir, rawdir, zipfile, traindir, testdir,
-        train_features, test_features
+        train_features_file, test_features_file
     )))
     checkTrue(is.numeric(nr_inspect))
 }
@@ -91,5 +91,12 @@ test.inspect <- function() {
     # Just run to prove nothing breaks
     # The output is directly to std out
     analyser$inspect()
+}
+
+test.read <- function() {
+    prepare()
+    analyser$read()
+    checkTrue(is.data.frame(train_features_df))
+    checkTrue(is.data.frame(test_features_df))
 }
 

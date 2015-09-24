@@ -36,8 +36,8 @@ zipfile <- "data/UciHarDataset.zip"
 traindir <- "data/UciHarDataset/train"
 testdir <- "data/UciHarDataset/test"
 
-train_features <- "data/UciHarDataset/train/X_test.txt"
-test_features <- "data/UciHarDataset/test/X_test.txt"
+train_features_file <- "data/UciHarDataset/train/X_train.txt"
+test_features_file <- "data/UciHarDataset/test/X_test.txt"
 
 # number of lines to inspect in each file to detect column count
 nr_inspect <- 5
@@ -190,6 +190,8 @@ Analyser <- function() {
     }
 
     read <- function() {
+        train_features_df <<- read.table(train_features_file)
+        test_features_df <<- read.table(test_features_file)
     }
 
     ##################################################
