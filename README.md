@@ -25,6 +25,20 @@ Any commercial use is prohibited.
 Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita.
 November 2012.
 
+## Checklist to Assist Reviewers
+
+1. Has the student submitted a tidy data set?
+    1. wide or long?
+    2. measurs to columns
+    3. observations to rows
+2. Did the student submit a Github repo with the required scripts?
+3. Was code book submitted to GitHub?
+    1. modifies and updates the codebooks available to you
+    2. variables and summaries you calculated
+    3. along with units, and any other relevant information
+4. README
+    1. Explains what the analysis files did.
+
 ## Given Project Instructions
 
 Note: This text is slightly modified to improve readability.
@@ -114,18 +128,8 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     * Grow this documents while working along. - TODO
     * Do regular `git commit` - TODO
 * Visit the reviewers checkpoints on Coursera - DONE
-* Note them to Readme - TODO
-    1. Has the student submitted a tidy data set?
-        1. wide or long
-        2. measurs to columns
-        3. observations to rows
-    2. Did the student submit a Github repo with the required scripts?
-    3. Was code book submitted to GitHub?
-        1. modifies and updates the codebooks available to you
-        2. variables and summaries you calculated
-        3. along with units, and any other relevant information
-    4. README
-        1. Explains what the analysis files did.
+    * Note them to Readme - DONE
+    * Set hyperlinks for all points - TODO
 * Read the posting **A really long advice thread for the Project**
   by David Hood - DONE
     * Take notes to the Readme. - DONE
@@ -179,6 +183,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     3. run_analysis.R
     4. tidy data text file
 
+* Check the checklist for reviewers links to all.
 * Check everything marked as TODO - TODO
 * Final push to Github - TODO
 * Submit to Coursera - TODO
