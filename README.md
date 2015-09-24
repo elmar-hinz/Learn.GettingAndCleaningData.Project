@@ -113,7 +113,8 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * Setup a Github repository with stubs for Readme,  License, Codebook - DONE
     * Grow this documents while working along. - TODO
     * Do regular `git commit` - TODO
-* Visit the reviewers checkpoints on Coursera - TODO
+* Visit the reviewers checkpoints on Coursera - DONE
+* Note them to Readme - TODO
     1. Has the student submitted a tidy data set?
         1. wide or long
         2. measurs to columns
@@ -125,7 +126,6 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
         3. along with units, and any other relevant information
     4. README
         1. Explains what the analysis files did.
-* Note them to Readme - TODO
 * Read the posting **A really long advice thread for the Project**
   by David Hood - DONE
     * Take notes to the Readme. - DONE
@@ -151,8 +151,9 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     * setup directories
     * download data
     * unpack data
+* inspect data - DONE
+    * especially dimensions
 * read data
-    * inspect data especially dimensions
 * combine train and test data (1.)
 * extract mean and standard deviations (2.)
 * merge tables with activity labels to address (3.)
