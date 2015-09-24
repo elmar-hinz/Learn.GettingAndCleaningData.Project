@@ -39,6 +39,16 @@ November 2012.
 4. README
     1. Explains what the analysis files did.
 
+## Project Files
+
+1. `README.md`: This file. Users guide.
+2. `UciHarDataset.zip`: The raw data.
+3. `CodeBook.md`: Describing the processing of the data.
+4. `run_analysis.R`: The data processing script.
+5. `run_analysis_test.R`: Unit tests for the previous script.
+6. `LICENSE.txt`: MIT Licencense covering the code.
+7. `tidyDataResult.txt`: The data output of this project.
+
 ## Given Project Instructions
 
 Note: This text is slightly modified to improve readability.
