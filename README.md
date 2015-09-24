@@ -114,18 +114,18 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     * Grow this documents while working along. - TODO
     * Do regular `git commit` - TODO
 * Visit the reviewers checkpoints on Coursera - TODO
-    * Note them to Readme - TODO
-         1. Has the student submitted a tidy data set?
-            * wide or long
-            * measurs to columns
-            * observations to rows
-        2. Did the student submit a Github repo with the required scripts?
-        3. Was code book submitted to GitHub?
-            * modifies and updates the codebooks available to you
-            * variables and summaries you calculated
-            * along with units, and any other relevant information
-        4. README
-            * Explains what the analysis files did.
+     1. Has the student submitted a tidy data set?
+        * wide or long
+        * measurs to columns
+        * observations to rows
+    2. Did the student submit a Github repo with the required scripts?
+    3. Was code book submitted to GitHub?
+        * modifies and updates the codebooks available to you
+        * variables and summaries you calculated
+        * along with units, and any other relevant information
+    4. README
+        * Explains what the analysis files did.
+* Note them to Readme - TODO
 * Read the posting **A really long advice thread for the Project**
   by David Hood - DONE
     * Take notes to the Readme. - DONE
