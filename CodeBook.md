@@ -1,91 +1,89 @@
-# The input data overview
+# The raw data
 
-The input data is retrieved by measuring the movement profiles of
-30 persons during differnt activities. Measurments are done by
+## Overview
+
+The input data is retrieved by tracking the movement profiles of
+30 persons during differnt activities. Trackings are done by
 use of Smartphones tied to the waists. The data is matched to
 six types of activities.
 
-Each row in the main data files contains 128 signal values,
-the signals of a fixed frame of time within the measurement.
+Each row of the main data files contains one **measurement**, that is 128
+signal values of type float. This are the tracked signals of a fixed frame of
+time.
 
 The 30 persons are split into two groups *Train* and *Test*
 by a relation of 70% to 30% (21/9).
 
-The raw data is finally processed into 561 features for both
+The raw signals finally processed into 561 features for both
 groups in the same way.
 
 For a details description see: `UCI HAR Dataset/README.txt`
 
-# Files within the input data
-
-* Top directory:
-    * README.txt:
-        Overwview
-    * activity_labels.txt:
-        List of 6 activety labels
-    * features.txt:
-        List of 561 calculated features
-    * features_info.txt:
-        Description how the features have been calculated.
-* `train/`:
-    * X_train.txt:
-        Feature results, 561 numbers per line, 7352 lines
-    * subject_train.txt:
-        Maps measurements to person, 1 number per line, 2947 lines
-    * y_train.txt:
-        Maps measurements to activities (1 - 6), 2947 lines
-* `test/`:
-    * X_test.txt:
-        Feature resuts, 561 numbers per line, 2947 lines
-    * subject_test.txt:
-        Maps measurements to person, 1 number per line, 2947 lines
-    * y_test.txt:
-        Maps measurements to activities (1 - 6), 1947 lines
+## Signals processing
 
 ```
 raw signals tAcc-XYZ and tGyro-XYZ
-    -> (Butterworth filter):
+    -> [Butterworth filter]:
     -> tBodyAcc-XYZ and tGravityAcc-XYZ
     -> tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ + Magnitudes:
         * tBodyAccMag, tGravityAccMag, tBodyGyroMag
         * tBodyAccJerkMag, tBodyGyroJerkMag
-    -> (Fast Fourier Transform (FFT)):
+    -> [Fast Fourier Transform (FFT)]:
         * fBodyAcc-XYZ, fBodyGyro-XYZ
         * fBodyAccJerk-XYZ
         * fBodyGyroMag
         * fBodyAccJerkMag, fBodyGyroJerkMag
 ```
 
-* fBodyAcc-XYZ
-* fBodyAccJerk-XYZ
-* fBodyAccJerkMag
-* fBodyAccMag
-* fBodyGyro-XYZ
-* fBodyGyroJerkMag
-* fBodyGyroMag
-* tBodyAcc-XYZ
-* tBodyAccJerk-XYZ
-* tBodyAccJerkMag
-* tBodyAccMag
-* tBodyGyro-XYZ
-* tBodyGyroJerk-XYZ
-* tBodyGyroJerkMag
-* tBodyGyroMag
-* tGravityAcc-XYZ
-* tGravityAccMag
+## Files included in raw data
 
-
-# Description
-
-* The data is split into the directories `train` and  `tests`.
-  matching participatiants groups *Train* and *Test*.
-* Train group contains 70% of participationts.
-* Test group contains 30% of participationts.
-* The data in both directories is equally structured.
-*
-
-
-
-
-
+* `/`:
+    * README.txt:
+        contains: Overwview
+        types: plain text
+    * activity_labels.txt:
+        contains: map of labels
+        types: integer, charater
+        dimensions: 6 * 2
+    * features.txt:
+        conatains: list of features
+        types: integer, charater
+        dimensions: 561 * 2
+    * features_info.txt:
+        contains: Description how the features have been calculated.
+        types: plain text
+* `train/`:
+    * X_train.txt:
+        contains: features
+        types: float
+        dimensions: 7352 * 561
+    * subject_train.txt:
+        contains: map to persons
+        types: integer
+        dimensions: 7352 * 1
+    * y_train.txt:
+        contains: map to activities
+        types: integer - range 1:6
+        dimensions: 7352 * 1
+    * Inertial\ Signals/:
+        contains: 9 files with measurements
+        types: float
+        dimensions: 7352 * 128
+* `test/`:
+    * X_test.txt:
+        contains: features
+        types: float
+        dimensions: 2947 * 561
+    * subject_test.txt:
+        contains: map to persons
+        types: integer
+        dimensions: 2947 * 1
+    * y_test.txt:
+        contains: map to activities
+        types: integer - range 1:6
+        dimensions: 2947 * 1
+    * Inertial\ Signals/:
+        contains: 9 files with measurements
+        types: float
+        dimensions: 2947 * 128
 
