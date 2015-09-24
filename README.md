@@ -5,9 +5,7 @@
 * Code license: **MIT**, see LICENSE.txt
 * Original data license: see **Original Data License** below
 * Coursera ID: getdata-032
-* Course URL: https://class.coursera.org/getdata-032/
-
-TODO: Check title settings
+* Project URL: https://class.coursera.org/getdata-032/human_grading
 
 ## Original Data License:
 
