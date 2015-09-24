@@ -114,7 +114,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     * Grow this documents while working along. - TODO
     * Do regular `git commit` - TODO
 * Visit the reviewers checkpoints on Coursera - TODO
-     1. Has the student submitted a tidy data set?
+    1. Has the student submitted a tidy data set?
         1. wide or long
         2. measurs to columns
         3. observations to rows
