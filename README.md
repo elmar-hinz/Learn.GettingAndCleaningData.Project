@@ -41,6 +41,8 @@ November 2012.
 
 ## Project Files
 
+TODO: Final check.
+
 1. `README.md`: This file. Users guide.
 2. `UciHarDataset.zip`: The raw data.
 3. `CodeBook.md`: Describing the processing of the data.
@@ -150,6 +152,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
   * `wc -l, wc -w`
 * Describe the raw data within the Codebook - TODO
 * Setup stubs `run_analysis.R` and `run_analysis_tests.R` (using Runit). - DONE
+* Add file overview to README. - DONE
 
 ### Codebook
 

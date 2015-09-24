@@ -33,9 +33,12 @@ prepare <- function() {
 
 test.configuration <- function() {
     checkTrue(is.logical(c(fullrun, download_from_local, do_inspect)))
-    checkTrue(is.character(
-       c(unpackdir, datadir, rawdir, zipfile, traindir, testdir)))
-    checkTrue(is.integer(nr_inspect))
+    checkTrue(is.character(c(
+        localurl, remoteurl,
+        unpackdir, datadir, rawdir, zipfile, traindir, testdir,
+        train_features, test_features
+    )))
+    checkTrue(is.numeric(nr_inspect))
 }
 
 test.constructor <- function() {
@@ -85,58 +88,8 @@ test.unpack <- function() {
 
 test.inspect <- function() {
     prepare()
-    # analyser$inspect('data/UciHarDataset/')
+    # Just run to prove nothing breaks
+    # The output is directly to std out
     analyser$inspect()
 }
-
-test.read_group <- function() {
-    prepare()
-    out <- analyser$read_group(testdir)
-    for(file in names(out)) {
-        checkTrue(is.data.frame(out[[file]]))
-    }
-    checkTrue(3 == length(out))
-}
-
-test.make_key <- function() {
-    path <- "data/train/X_train.txt"
-    pattern <- "train"
-    checkIdentical("X_", analyser$make_key(path, pattern))
-}
-
-test.make_match_map <- function() {
-    # check non uniqe file pathes
-    checkException(silent = silent,
-       analyser$make_match_map(c('a', 'a'), c('a', 'b')))
-    checkException(silent = silent,
-       analyser$make_match_map(c('a', 'b'), c('a', 'a')))
-    # check different lengths
-    checkException(silent = silent,
-       analyser$make_match_map(1:2, 1:3))
-    # check ununique keys
-    firsts <- c('train/a.txt', 'train/plus/a.txt')
-    seconds <- c('test/a.txt', 'test/plus/a.txt')
-    checkException(silent = silent,
-       analyser$make_match_map(firsts, seconds))
-    # check missing element alpha in seconds
-    firsts <- c('train/alpha.txt', 'a')
-    seconds <- c('test/beta.txt', 'a')
-    checkException(silent = silent,
-       analyser$make_match_map(firsts, seconds))
-    # check expected result even when input is disordered
-    # alphabetically sorted by keys
-    trains <- c('train/b.txt', 'train/a.txt')
-    tests <- c('test/a.txt', 'test/b.txt')
-    patterns <- c('train', 'test')
-    out <- analyser$make_match_map(trains, tests, patterns)
-    checkIdentical(c('a', 'b'), names(out))
-    checkIdentical(c(trains[1], tests[2]), out[['b']])
-    checkIdentical(c(trains[2], tests[1]), out[['a']])
-}
-
-# test.combine_train_and_test <- function() {
-#     prepare()
-#     analyser$combine_train_and_test()
-# }
-
 

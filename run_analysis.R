@@ -2,15 +2,14 @@
 #                                                                    #
 #    Copyright (c) 2015 Elmar Hinz (github.com/elmar-hinz)           #
 #                                                                    #
-#    This script solves the TODO                 #
-#    of coursera TODO
-#    It ships with a suite of unit tests.                            #
+#    Code project of the course                                      #
+#    Coursera Getting and Cleaning Data - getdata-032                #
 #                                                                    #
 #    License: MIT (see LICENSE.txt)                                  #
 #                                                                    #
 ######################################################################
 
-require(stringr)
+# require(stringr)
 
 ######################################################################
 # Configuration
@@ -37,6 +36,9 @@ zipfile <- "data/UciHarDataset.zip"
 traindir <- "data/UciHarDataset/train"
 testdir <- "data/UciHarDataset/test"
 
+train_features <- "data/UciHarDataset/train/X_test.txt"
+test_features <- "data/UciHarDataset/test/X_test.txt"
+
 # number of lines to inspect in each file to detect column count
 nr_inspect <- 5
 
@@ -48,10 +50,6 @@ nr_inspect <- 5
 
 Analyser <- function() {
 
-    trains <- NULL
-    tests <- NULL
-    map <- NULL
-
     ##################################################
     # Constructor
     #
@@ -59,18 +57,17 @@ Analyser <- function() {
     ##
     construct <- function() {
         list(
+            main = main,
+            cleanup = cleanup,
             setup = setup,
             download = download,
             unpack = unpack,
             inspect = inspect,
             read = read,
-            raw_report = raw_report,
-            cleanup = cleanup,
-            make_match_map = make_match_map,
-            read_group = read_group,
-            make_key = make_key,
-            raw_report = raw_report,
-            main = main
+            combine = combine,
+            merge =  merge,
+            calculate = calculate,
+            report = report
          )
     }
 
@@ -88,8 +85,10 @@ Analyser <- function() {
         unpack()
         if(do_inspect) inspect(rawdir)
         read()
-        raw_report()
-        combine()
+        # combine()
+        # merge()
+        # calculate()
+        # report()
         NULL
     }
 
@@ -184,7 +183,6 @@ Analyser <- function() {
             linelengths <- unique(vapply(splits, length, 0L))
             if(length(linelengths) > 1) y <- "mixed"
             else y <- linelengths
-            isnu <- lapply(splits[2], is.numeric)
             out <- sprintf("%25s:  %s * %s", basename(file), x, y)
             print(out)
         }
@@ -192,107 +190,35 @@ Analyser <- function() {
     }
 
     read <- function() {
-        trains <<- read_group(traindir)
-        tests <<- read_group(testdir)
-        map <<- make_match_map(names(trains), names(tests))
     }
 
     ##################################################
-    # Read files from train or test group
+    # Combine train and test data
     #
-    # Reads by `read.table` and returns a list of
-    # data frames. The files basename without postfix
-    # goes into each key of the list.
-    #
-    # @param character - path to the groups directory
-    # @return list - list of dataframes
+    # @return NULL
     ##
-    read_group <- function(dir) {
-        files <- list()
-        pathes <- list.files(dir, recursive = F, full.names = T)
-        for(path in pathes) {
-            if(!file.info(path)$isdir) {
-                name <- basename(path)
-                name <- strsplit(name, split = '.', fixed = T)[[1]][1]
-                files[[name]] <- read.table(path)
-            }
-        }
-        files
-    }
+    combine <- function() {}
 
     ##################################################
-    # Check two lists of given file pathes and pair them
+    # Merge data into one table
     #
-    # Example:
-    #      data/train/X_train.txt matches data/test/X_test.txt
-    #      The differing patterns are "train" vs "test".
-    #
-    # * Inputs two lists of file pathes that differ by pattern.
-    # * Inspects the file names and matches them as pairs.
-    # * Checks that nothing is in excess or missing.
-    # * Creates a common key for matching files.
-    # * This keys are extracted from the file names.
-    # * Returns a list: keys and paired file pathes.
-    #
-    # @param charater - vector of train files
-    # @param charater - vector of test files
-    # @param charater - patterns, defaults to c(train, test)
-    # @return list - char keys, char vectors of lenght 2
+    # @return NULL
     ##
-    make_match_map <-
-        function(firsts, seconds, patterns = c('train', 'test')) {
-        # initial checks
-        if(length(firsts) >  length(unique(firsts)))
-            stop("elements in firsts are not unique")
-        if(length(seconds) > length(unique(seconds)))
-            stop("elements in seconds are not unique")
-        if(length(firsts) != length(seconds))
-            stop("elements in firsts and seconds don't have equal length")
-        # try to match
-        heap <- seconds
-        out <- list()
-        for(candidate in firsts) {
-            key <- make_key(candidate, patterns[1])
-            if(key %in% names(out)) {
-                msg <- 'filename "%s" and it\'s key "%s" are not unique'
-                stop(sprintf(msg, candidate, key))
-            }
-            needle <- str_replace_all(candidate, patterns[1], patterns[2])
-            if(!(needle %in% heap)) {
-                msg <- 'missing element "%s" in seconds "%s"\n'
-                stop(sprintf(msg, needle[1], heap[1]))
-            } else {
-                heap <- heap[-(match(needle, heap))]
-                out[[key]] <- c(candidate, needle)
-            }
-        }
-        out[sort(names(out))]
-    }
+    merge <- function() {}
 
     ##################################################
-    # Make a key from a file path
+    # Do the required calculations
     #
-    # "data/X_train.txt" results in "X_" for "train"
-    #
-    # * directories are stripped
-    # * file ending is stripped
-    # * pattern is stripped
-    #
-    # @param character - file path
-    # @param character - pattern to remove
-    # @return character - the generated key
+    # @return NULL
     ##
-    make_key <- function(filepath, pattern_to_remove) {
-        basename <- basename(filepath)
-        key <- strsplit(basename, split = ".", fixed = T)[[1]][1]
-        str_replace(key, pattern_to_remove, "")
-    }
+    calculate  <- function() {}
 
     ##################################################
-    # Analyse import files
+    # Report results into the tidy data file
+    #
+    # @return NULL
     ##
-    raw_report <- function() {
-    }
+    report <- function() {}
 
     # Finally call the contructor function and return the object list
     construct()
