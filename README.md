@@ -1,13 +1,24 @@
-# Coursera Getting and Cleaning Data Project Challange
+# Coursera Getting and Cleaning Data Course Project
 
-This script is the programming project challange in track 32.
-
-
+* Title: Course Project
 * Copyright (c): 2015 Elmar Hinz
 * Code license: **MIT**, see LICENSE.txt
 * Original data license: see **Original Data License** below
+* Coursera ID: getdata-032
+* Course URL: https://class.coursera.org/getdata-032/
 
 TODO: Check title settings
+
+## Original Data License:
+
+Use of this dataset in publications must be acknowledged by referencing the
+following publication [1]
+
+[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
+
+Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
 
 ## Given Project Instructions
 
@@ -42,15 +53,40 @@ You should create one R script called **run_analysis.R** that does the following
        data set with the **average** of each variable for each activity and
        each subject.
 
-## Original Data License:
+## Summary of David Hoods advices
 
-Use of this dataset in publications must be acknowledged by referencing the following publication [1]
+Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 
-[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
-
-This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
-
-Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
+* Check what the dimensions of the data is, for how they will fit together.
+* When you give the variables descriptive names, explain why the names are
+  descriptive.
+* Commands:
+    * dim()
+    * rbind()
+    * cbind()
+    * write.table()
+* Ignore the *inertial folder* first. Useful for to check later.
+* Decide yourself what *means* to calculate, but explain your reasoning.
+* Descriptive activity names things like "Walking" and "Walking Up". (see 3.)
+* Descriptive variable names things like "V1" and "V2". (see 4.)
+* Attention: Merging reorders data!
+* Give the code for reading the file back into R.
+    ```
+     data <- read.table(file_path, header = TRUE)
+     View(data)
+     ```
+* Either the wide or narrow form is tidy. Give reasoning!
+    * Read Hadley Wickham's Tidy Data paper.
+    * Look for thread about tidy data of David Hoods.
+* Compare codebook in quiz 1
+* Check result:
+    * All subjects should have done all activities.
+    * Has it got headings that make it clear which column is which?
+    * Is it one column per variable?
+    * Is it one row per observation?
+    * Tidy data is not a certain number of rows and columns.
+* Cite and link!
+* Up load the set created in step 5 only.
 
 ## Plan and protocol
 
@@ -85,8 +121,13 @@ Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012
     * Document in wich files to find the solutions to assist the reviewer.
 
 ### Finally
+* Check exists: - TODO
+    1. Readme.md
+    2. codebook.md
+    3. run_analysis.R
+    4. tidy data text file
+
 * Check everything marked as TODO - TODO
 * Final push to Github - TODO
 * Submit to Coursera - TODO
-
 
