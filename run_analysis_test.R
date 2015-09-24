@@ -3,7 +3,7 @@
 ##################################################
 source("run_analysis.R")
 
-silent <- F
+silent <- T
 
 ##################################################
 # Setup the analyser object with a useful
@@ -32,9 +32,10 @@ prepare <- function() {
 }
 
 test.configuration <- function() {
-    checkTrue(is.logical(c(fullrun, download_from_local)))
+    checkTrue(is.logical(c(fullrun, download_from_local, do_inspect)))
     checkTrue(is.character(
        c(unpackdir, datadir, rawdir, zipfile, traindir, testdir)))
+    checkTrue(is.integer(nr_inspect))
 }
 
 test.constructor <- function() {
@@ -80,6 +81,12 @@ test.unpack <- function() {
     out <- analyser$unpack()
     checkTrue(is.null(out))
     checkTrue(file.exists(rawdir))
+}
+
+test.inspect <- function() {
+    prepare()
+    # analyser$inspect('data/UciHarDataset/')
+    analyser$inspect()
 }
 
 test.read_group <- function() {
@@ -131,7 +138,5 @@ test.make_match_map <- function() {
 #     prepare()
 #     analyser$combine_train_and_test()
 # }
-
-
 
 

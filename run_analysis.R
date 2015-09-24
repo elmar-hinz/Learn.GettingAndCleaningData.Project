@@ -19,8 +19,11 @@ require(stringr)
 # Do a fullrun including download from remote or local
 fullrun <- FALSE
 
-# If local is TRUE downlad from local file
+# If local is TRUE downlad from local file (faster)
 download_from_local <- TRUE
+
+# Display raw data inspection (takes some time)
+do_inspect <- TRUE
 
 # URLs
 localurl <- "file://./UciHarDataset.zip"
@@ -33,6 +36,9 @@ rawdir <- "data/UciHarDataset"
 zipfile <- "data/UciHarDataset.zip"
 traindir <- "data/UciHarDataset/train"
 testdir <- "data/UciHarDataset/test"
+
+# number of lines to inspect in each file to detect column count
+nr_inspect <- 5
 
 ######################################################################
 # Create analyser object
@@ -56,6 +62,7 @@ Analyser <- function() {
             setup = setup,
             download = download,
             unpack = unpack,
+            inspect = inspect,
             read = read,
             raw_report = raw_report,
             cleanup = cleanup,
@@ -79,6 +86,7 @@ Analyser <- function() {
         setup()
         download()
         unpack()
+        if(do_inspect) inspect(rawdir)
         read()
         raw_report()
         combine()
@@ -154,20 +162,39 @@ Analyser <- function() {
         NULL
     }
 
+    ##################################################
+    # Inspect the files in the given directory tree
+    #
+    # * Displays  to std out.
+    # * Recursively finds the files.
+    # * Counts rows and columns.
+    # * For plain text files the column count is *mixed*.
+    # * Column count is done by inspecting x lines of head.
+    # * Set global configuration *nr_inspect* to modify this.
+    #
+    # @return NULL
+    ##
+    inspect <- function(dir = rawdir) {
+        files <- dir(dir, recursive=T, full.names=T)
+        for(file in files) {
+            lines <- readLines(file)
+            x <- length(lines)
+            head <- head(lines, n = nr_inspect)
+            splits <- strsplit(head, "\\s+", perl = T)
+            linelengths <- unique(vapply(splits, length, 0L))
+            if(length(linelengths) > 1) y <- "mixed"
+            else y <- linelengths
+            isnu <- lapply(splits[2], is.numeric)
+            out <- sprintf("%25s:  %s * %s", basename(file), x, y)
+            print(out)
+        }
+        NULL
+    }
+
     read <- function() {
         trains <<- read_group(traindir)
         tests <<- read_group(testdir)
         map <<- make_match_map(names(trains), names(tests))
-    }
-
-    xxx <- function() {
-        triples <- make_match_map(
-          names(trains), names(tests), c('train', 'test', 'combi'))
-        combis <- list()
-        for ( triple in triples ) {
-            combis[triple[3]]
-        }
-        NULL
     }
 
     ##################################################
