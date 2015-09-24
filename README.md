@@ -86,10 +86,12 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * Descriptive variable names things like "V1" and "V2". (see 4.)
 * Attention: Merging reorders data!
 * Give the code for reading the file back into R.
-    ```
+
+```
      data <- read.table(file_path, header = TRUE)
      View(data)
-     ```
+ ```
+
 * Either the wide or narrow form is tidy. Give reasoning!
     * Read Hadley Wickham's Tidy Data paper.
     * Look for thread about tidy data of David Hoods.
