@@ -52,18 +52,41 @@ This dataset is distributed AS-IS and no responsibility implied or explicit can 
 
 Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
 
-## TODO
+## Plan and protocol
 
-* Create files
-    * README
-    * License.txt
-    * Codebook
-* Understand the task
-* Manually inspect the data
-* Coding
-    * assert data directory
-    * assert download
-    * assert unzip
-    * cleaning
-    * joining
+### Prepare
+
+* Read the given tasks - DONE
+* Setup a Github repository with stubs for Readme,  License, Codebook - DONE
+    * Grow this documents while working along. - TODO
+    * Do regular `git commit` - TODO
+* Visit the reviewers checkpoints on Coursera - TODO
+    * Note them to Readme - TODO
+* Read the posting **A really long advice thread for the Project**
+  by David Hood - TODO
+    * Take notes to the Readme. - TODO
+* Manually download the data  - DONE
+* Read the datas Readme - DONE
+* Inspect the files with command lines tools. How do they match together? - DONE
+  * `head, tail`
+  * `wc -l, wc -w`
+* Describte the raw data within the Codebook - TODO
+* Setup stubs `run_analysis.R` and `run_analysis_tests.R` (using Runit). - DONE
+
+### Coding and testing side by side
+
+### Document
+
+* Finalize the Codebook.
+* Finalize the Readme.
+* Finalize code comments.
+* Anything else?
+* Revisit the reviewers checkpoints in the Readme
+    * Document in wich files to find the solutions to assist the reviewer.
+
+### Finally
+* Check everything marked as TODO - TODO
+* Final push to Github - TODO
+* Submit to Coursera - TODO
+
 
