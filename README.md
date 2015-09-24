@@ -53,7 +53,7 @@ You should create one R script called **run_analysis.R** that does the following
        data set with the **average** of each variable for each activity and
        each subject.
 
-## Summary of David Hoods advices
+## Summary of David Hoods Advices
 
 Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 
@@ -88,7 +88,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * Cite and link!
 * Up load the set created in step 5 only.
 
-## Plan and protocol
+## Plan / Protocal
 
 ### Prepare
 
@@ -99,17 +99,32 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * Visit the reviewers checkpoints on Coursera - TODO
     * Note them to Readme - TODO
 * Read the posting **A really long advice thread for the Project**
-  by David Hood - TODO
-    * Take notes to the Readme. - TODO
+  by David Hood - DONE
+    * Take notes to the Readme. - DONE
 * Manually download the data  - DONE
 * Read the datas Readme - DONE
 * Inspect the files with command lines tools. How do they match together? - DONE
   * `head, tail`
   * `wc -l, wc -w`
-* Describte the raw data within the Codebook - TODO
+* Describe the raw data within the Codebook - TODO
 * Setup stubs `run_analysis.R` and `run_analysis_tests.R` (using Runit). - DONE
 
-### Coding and testing side by side
+### Coding and Testing Side by Side
+
+* prepare - DONE
+    * cleanup
+    * setup directories
+    * download data
+    * unpack data
+* read data
+    * inspect data especially dimensions
+* combine train and test data (1.)
+* extract mean and standard deviations (2.)
+* merge tables with activity labels to address (3.)
+* add descriptive variable names (4.)
+* do 5.
+    * create independent tidy dataset
+    * average of each variable from 4. per activity per subject
 
 ### Document
 
@@ -121,6 +136,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     * Document in wich files to find the solutions to assist the reviewer.
 
 ### Finally
+
 * Check exists: - TODO
     1. Readme.md
     2. codebook.md
