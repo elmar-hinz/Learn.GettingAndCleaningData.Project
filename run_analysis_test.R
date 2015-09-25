@@ -129,12 +129,13 @@ test.combine <- function() {
     analyser$read()
     out <- analyser$combine()
     checkTrue(is.null(out))
-    checkTrue(is.data.frame(main_df))
-    checkEquals(10299, nrow(main_df))
-    checkTrue(is.data.frame(person_df))
-    checkEquals(10299, nrow(person_df))
-    checkTrue(is.data.frame(activity_df))
-    checkEquals(10299, nrow(activity_df))
+    checkTrue(is.data.frame(combined_df))
+    checkEquals(10299, nrow(combined_df))
+    checkEquals(564, ncol(combined_df))
+    checkIdentical(c("index", "person", "activity", "V1"),
+      head(names(combined_df), n=4))
+    for(i in 1:3) checkEquals("integer", class(combined_df[,i]))
+    for(i in 4:561) checkEquals("numeric", class(combined_df[,i]))
 }
 
 test.merge <- function() {

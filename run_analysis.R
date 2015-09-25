@@ -232,20 +232,47 @@ Analyser <- function() {
     }
 
     ##################################################
-    # Combine train and test data
+    # Combine train and test data (task 1)
     #
-    # Combines by rows.
+    # Merges the training and the test sets of interest
+    # to create ONE data set: combined_df
     #
-    # 1. X_train_df + X_test_df into main_df
-    # 2. y_train_df + y_test_df into activity_df
-    # 3. subject_train_df + subject_test_df into person_df
+    # Step 1: rbind()
+    #
+    # 1. subject_train_df + subject_test_df into persons
+    # 2. y_train_df + y_test_df into activities
+    # 3. X_train_df + X_test_df into features
+    #
+    # Set column names of "activity" and "person".
+    #
+    # Step 2:
+    #
+    # Create 1 column data frame `index` from 1 to number of rows.
+    #
+    # Step 3: cbind()
+    #
+    # 1. index
+    # 2. persons
+    # 3. activities
+    # 4. features
+    #
+    # Globally exports combined_df
+    #
+    #   column 1: name = index, type = integer
+    #   column 2: name = person, type = integer
+    #   column 3: name = activity, type = integer
+    #   columns 4 - 564: name = V1 - V561, type = numeric
     #
     # @return NULL
     ##
     combine <- function() {
-        main_df <<- rbind(X_train_df, X_test_df)
-        activity_df <<- rbind(y_train_df, y_test_df)
-        person_df <<- rbind(subject_train_df, subject_test_df)
+        features <- rbind(X_train_df, X_test_df)
+        activities <- rbind(y_train_df, y_test_df)
+        persons <- rbind(subject_train_df, subject_test_df)
+        names(activities) <- "activity"
+        names(persons) <- "person"
+        index <- data.frame(index = 1:nrow(features))
+        combined_df <<- cbind(index, persons, activities, features)
         NULL
     }
 
