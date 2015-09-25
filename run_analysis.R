@@ -91,7 +91,7 @@ Analyser <- function() {
         read()
         combine()
         setnames()
-        # merge()
+        merge()
         # calculate()
         # report()
         NULL
@@ -247,7 +247,7 @@ Analyser <- function() {
     #
     # Step 2: cbind()
     #
-    # 1. index
+    # 1. index (created from 1 to number of rows)
     # 2. persons
     # 3. activities
     # 4. features
@@ -273,17 +273,18 @@ Analyser <- function() {
     ##################################################
     # Set human readable names (task 4)
     #
-    # Set column names:
+    # Set column names to combined_df:
     #
-    # 1. index
-    # 2. person
-    # 3. activity
-    # 4. "tBodyAcc-mean()-X"
-    # ...
-    # 564.  "angle(Z,gravityMean)"
+    #   1. index
+    #   2. person
+    #   3. activity
+    #   4. "tBodyAcc-mean()-X"
+    #   ...
+    #   564.  "angle(Z,gravityMean)"
     #
-    # Name 4. - 564. are the labels from features_df.
-    # The correct order is checked for.
+    # Names 4 - 564 are the labels from features_df.
+    # The correct order of the mapping is checked against
+    # it's index (column 1).
     #
     # @return NULL
     ##
@@ -295,11 +296,18 @@ Analyser <- function() {
     }
 
     ##################################################
-    # Merge data into one table
+    # Merge activity labels
+    #
+    # Replace the activity integers by activity labels
+    # from activity_labels_df.
     #
     # @return NULL
     ##
     merge <- function() {
+        # get a vector of labels sorted by index of activity_labels_df
+        labels <- activity_labels_df[order(activity_labels_df[1]), ][,2]
+        # apply the labels
+        combined_df$activity <<- labels[combined_df$activity]
         NULL
     }
 

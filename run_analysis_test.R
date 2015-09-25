@@ -149,8 +149,17 @@ test.setnames <- function() {
 }
 
 test.merge <- function() {
+    prepare()
+    analyser$read()
+    analyser$combine()
+    analyser$setnames()
+    checkTrue(!is.factor(combined_df$activity))
     out <- analyser$merge()
     checkTrue(is.null(out))
+    checkTrue(is.factor(combined_df$activity))
+    checkEquals("STANDING", as.character(combined_df$activity[1]))
+    checkEquals("SITTING", as.character(combined_df$activity[28]))
+    checkEquals("LAYING", as.character(combined_df$activity[52]))
 }
 
 test.calculate <- function() {
