@@ -116,6 +116,49 @@ Analyser <- function() {
     }
 
     ##################################################
+    # Inspect the files in the given directory tree
+    #
+    # This function isn't called from main().
+    # Call it manually to inspect the contents
+    # of a directory.
+    #
+    # It does the same preparations as main() to get the
+    # data available.
+    #
+    # Defaults to the root directory of the raw data.
+    #
+    # * Displays  to std out.
+    # * Recursively finds the files.
+    # * Counts rows and columns.
+    # * For plain text files the column count is *mixed*.
+    # * Column count is done by inspecting x lines of head.
+    # * Set global configuration *nr_inspect* to modify this.
+    #
+    # @return NULL
+    ##
+    inspect <- function(dir = rawdir) {
+        cleanup()
+        setup()
+        download()
+        unpack()
+        read()
+
+        files <- dir(dir, recursive=T, full.names=T)
+        for(file in files) {
+            lines <- readLines(file)
+            x <- length(lines)
+            head <- head(lines, n = nr_inspect)
+            splits <- strsplit(head, "\\s+", perl = T)
+            linelengths <- unique(vapply(splits, length, 0L))
+            if(length(linelengths) > 1) y <- "mixed"
+            else y <- linelengths
+            out <- sprintf("%25s:  %s * %s", basename(file), x, y)
+            print(out)
+        }
+        NULL
+    }
+
+    ##################################################
     # Cleanup
     #
     # Cleans everything up to prepare a full run if `fullrun` is TRUE.
@@ -191,34 +234,6 @@ Analyser <- function() {
                 str(dir)
                 stop("expected to find one directory")
             }
-        }
-        NULL
-    }
-
-    ##################################################
-    # Inspect the files in the given directory tree
-    #
-    # * Displays  to std out.
-    # * Recursively finds the files.
-    # * Counts rows and columns.
-    # * For plain text files the column count is *mixed*.
-    # * Column count is done by inspecting x lines of head.
-    # * Set global configuration *nr_inspect* to modify this.
-    #
-    # @return NULL
-    ##
-    inspect <- function(dir = rawdir) {
-        files <- dir(dir, recursive=T, full.names=T)
-        for(file in files) {
-            lines <- readLines(file)
-            x <- length(lines)
-            head <- head(lines, n = nr_inspect)
-            splits <- strsplit(head, "\\s+", perl = T)
-            linelengths <- unique(vapply(splits, length, 0L))
-            if(length(linelengths) > 1) y <- "mixed"
-            else y <- linelengths
-            out <- sprintf("%25s:  %s * %s", basename(file), x, y)
-            print(out)
         }
         NULL
     }
