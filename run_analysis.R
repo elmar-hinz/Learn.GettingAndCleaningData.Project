@@ -243,13 +243,17 @@ Analyser <- function() {
     # 2. y_train_df + y_test_df into activities
     # 3. X_train_df + X_test_df into features
     #
-    # Set column names of "activity" and "person".
-    #
     # Step 2:
     #
-    # Create 1 column data frame `index` from 1 to number of rows.
+    # Create a one column data frame named "index"
+    # with integers from 1 to number of rows.
     #
-    # Step 3: cbind()
+    # Step 3:
+    #
+    # Set column names of one column data frames:
+    #    "index", "activity", "person"
+    #
+    # Step 4: cbind()
     #
     # 1. index
     # 2. persons
@@ -269,9 +273,10 @@ Analyser <- function() {
         features <- rbind(X_train_df, X_test_df)
         activities <- rbind(y_train_df, y_test_df)
         persons <- rbind(subject_train_df, subject_test_df)
+        index <- data.frame(1:nrow(features))
+        names(index) <- "index"
         names(activities) <- "activity"
         names(persons) <- "person"
-        index <- data.frame(index = 1:nrow(features))
         combined_df <<- cbind(index, persons, activities, features)
         NULL
     }
