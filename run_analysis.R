@@ -9,7 +9,7 @@
 #                                                                    #
 ######################################################################
 
-# require(stringr)
+require(stringr)
 
 ######################################################################
 # Configuration
@@ -70,7 +70,8 @@ Analyser <- function() {
             read = read,
             combine = combine,
             setnames = setnames,
-            merge =  merge,
+            setlabels =  setlabels,
+            extract = extract,
             calculate = calculate,
             report = report
          )
@@ -84,14 +85,21 @@ Analyser <- function() {
     # @return NULL
     ##
     main <- function() {
+        # Prepare the workspace and read the raw data.
+
         cleanup()
         setup()
         download()
         unpack()
         read()
-        combine()
-        setnames()
-        merge()
+
+        # It's not required to do the tasks in the given order.
+        # I want to reach a human readable df as soon as possible.
+
+        combine() # task 1
+        setnames() # task 4
+        setlabels() # task 3
+
         # At this point:
         #
         #   1.) all raw data is combined into one data frame.
@@ -99,6 +107,9 @@ Analyser <- function() {
         #   3.) There is one row per observation.
         #   4.) There is one column per variable.
         #   5.) There is an index column.
+
+        extract() # task 2
+
         # calculate()
         # report()
         NULL
@@ -297,8 +308,8 @@ Analyser <- function() {
     ##
     setnames <- function() {
         stopifnot(identical(1:561, features_df[,1]))
-        names(combined_df) <<- c("index", "person", "activity",
-            as.character(features_df[,2]))
+        feature_names <- as.character(features_df[,2])
+        names(combined_df) <<- c("index", "person", "activity", feature_names)
         NULL
     }
 
@@ -310,11 +321,32 @@ Analyser <- function() {
     #
     # @return NULL
     ##
-    merge <- function() {
+    setlabels <- function() {
         # get a vector of labels sorted by index of activity_labels_df
         labels <- activity_labels_df[order(activity_labels_df[1]), ][,2]
         # apply the labels
         combined_df$activity <<- labels[combined_df$activity]
+        NULL
+    }
+
+    ##################################################
+    # Extract only the measurements on mean and std
+    #
+    # The pattern of those names are "mean(" and "std("
+    #
+    # Globally exports extracted_df:
+    #
+    #   column 1: index
+    #   column 2: person
+    #   column 3: activity
+    #   columns 4 - 69: mean and std measurements
+    #
+    # @return NULL
+    ##
+    extract <- function() {
+        pattern <- "mean\\(|std\\("
+        positions <- grep(pattern, names(combined_df))
+        extracted_df <<- combined_df[,c(1:3, positions)]
         NULL
     }
 

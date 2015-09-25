@@ -148,18 +148,35 @@ test.setnames <- function() {
     checkIdentical("angle(Z,gravityMean)", names(combined_df)[564])
 }
 
-test.merge <- function() {
+test.setlabels <- function() {
     prepare()
     analyser$read()
     analyser$combine()
     analyser$setnames()
     checkTrue(!is.factor(combined_df$activity))
-    out <- analyser$merge()
+    out <- analyser$setlabels()
     checkTrue(is.null(out))
     checkTrue(is.factor(combined_df$activity))
     checkEquals("STANDING", as.character(combined_df$activity[1]))
     checkEquals("SITTING", as.character(combined_df$activity[28]))
     checkEquals("LAYING", as.character(combined_df$activity[52]))
+}
+
+test.extract <- function() {
+    prepare()
+    analyser$read()
+    analyser$combine()
+    analyser$setnames()
+    analyser$setlabels()
+    out <- analyser$extract()
+    checkTrue(is.null(out))
+    checkTrue(is.data.frame(extracted_df))
+    checkEquals(10299, nrow(extracted_df))
+    checkEquals(69, ncol(extracted_df))
+    checkIdentical(c("index", "person", "activity"),
+        head(names(extracted_df), n=3))
+    checkIdentical("tBodyAcc-mean()-X", names(extracted_df)[4])
+    checkIdentical("fBodyBodyGyroJerkMag-std()", names(extracted_df)[69])
 }
 
 test.calculate <- function() {
