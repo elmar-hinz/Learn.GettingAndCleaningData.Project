@@ -42,6 +42,7 @@ y_train_file <- "data/UciHarDataset/train/y_train.txt"
 y_test_file <- "data/UciHarDataset/test/y_test.txt"
 subject_train_file <- "data/UciHarDataset/train/subject_train.txt"
 subject_test_file <- "data/UciHarDataset/test/subject_test.txt"
+result_file <- "tidy_data.txt"
 
 # Number of lines to inspect in each file to detect column count
 nr_inspect <- 5
@@ -109,9 +110,8 @@ Analyser <- function() {
         #   5.) There is an index column.
 
         extract() # task 2
-
-        # calculate()
-        # report()
+        calculate() # task 5
+        report() # write the tidy dataset
         NULL
     }
 
@@ -165,6 +165,7 @@ Analyser <- function() {
     #
     # 1. directories used to process the data
     # 2. variables caching data frames between non full runs
+    # 3. the tidy result file
     #
     # @return NULL
     ##
@@ -172,6 +173,7 @@ Analyser <- function() {
         if(fullrun) {
             if(file.exists(unpackdir)) unlink(unpackdir, recursive = T)
             if(file.exists(datadir)) unlink(datadir, recursive = T)
+            if(file.exists(result_file)) unlink(result_file)
             features_df <<- NULL
             activity_labels_df <<- NULL
             X_train_df <<- NULL
@@ -368,9 +370,33 @@ Analyser <- function() {
     ##################################################
     # Do the required calculations
     #
+    # Task 5:
+    #
+    # "From the data set in step 4, creates a **second**,
+    # independent tidy data set with the **average** of
+    # each variable for each activity AND each subject."
+    #
+    # As this is phrased within one sentence and it is
+    # combined by AND, I understand they ask for
+    # all possible combinations of a person and it's
+    # activities. To do this, I use two nested for loops.
+    #
     # @return NULL
     ##
     calculate  <- function() {
+        nc <- ncol(extracted_df)
+        persons <- unique(extracted_df$person)
+        activities <- unique(extracted_df$activity)
+        tidy_df <<- NULL
+        for(p in persons) {
+            for(a in activities) {
+                rows <- (extracted_df$person == p & extracted_df$activity == a)
+                values <- extracted_df[rows, 4:nc]
+                means <- lapply(values, mean)
+                result <- cbind( data.frame(person = p, activity = a), means)
+                tidy_df <<- rbind(tidy_df, result)
+            }
+        }
         NULL
     }
 
@@ -380,6 +406,7 @@ Analyser <- function() {
     # @return NULL
     ##
     report <- function() {
+        write.table(tidy_df, result_file)
         NULL
     }
 

@@ -180,12 +180,30 @@ test.extract <- function() {
 }
 
 test.calculate <- function() {
+    prepare()
+    analyser$read()
+    analyser$combine()
+    analyser$setnames()
+    analyser$setlabels()
+    analyser$extract()
     out <- analyser$calculate()
     checkTrue(is.null(out))
+    checkIdentical(c("person", "activity"), head(names(tidy_df), n=2))
+    checkEquals(68, ncol(tidy_df))
+    cc <- complete.cases(tidy_df)
+    checkEquals(sum(cc),  nrow(tidy_df))
 }
 
 test.report <- function() {
+    prepare()
+    analyser$read()
+    analyser$combine()
+    analyser$setnames()
+    analyser$setlabels()
+    analyser$extract()
+    analyser$calculate()
     out <- analyser$report()
     checkTrue(is.null(out))
+    checkTrue(file.exists(result_file))
 }
 

@@ -172,9 +172,9 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     * especially dimensions
 * read data - DONE
 * combine train and test data (1.) - DONE
-* extract mean and standard deviations (2.)
-* merge tables with activity labels (3.)
-* add descriptive variable names (4.)
+* extract mean and standard deviations (2.) - DONE
+* merge tables with activity labels (3.) - DONE
+* add descriptive variable names (4.) - DONE
 * do 5.
     * create independent tidy dataset
     * average of each variable from 4. per activity per subject
