@@ -92,6 +92,13 @@ Analyser <- function() {
         combine()
         setnames()
         merge()
+        # At this point:
+        #
+        #   1.) all raw data is combined into one data frame.
+        #   2.) Names and labels are human readable.
+        #   3.) There is one row per observation.
+        #   4.) There is one column per variable.
+        #   5.) There is an index column.
         # calculate()
         # report()
         NULL
@@ -296,7 +303,7 @@ Analyser <- function() {
     }
 
     ##################################################
-    # Merge activity labels
+    # Merge activity labels (task 3)
     #
     # Replace the activity integers by activity labels
     # from activity_labels_df.
