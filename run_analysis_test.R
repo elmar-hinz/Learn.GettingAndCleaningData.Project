@@ -36,7 +36,7 @@ test.configuration <- function() {
     checkTrue(is.character(c(
         localurl, remoteurl,
         unpackdir, datadir, rawdir, zipfile, traindir, testdir,
-        train_features_file, test_features_file
+        X_train_file, X_test_file
     )))
     checkTrue(is.numeric(nr_inspect))
 }
@@ -90,13 +90,65 @@ test.inspect <- function() {
     prepare()
     # Just run to prove nothing breaks
     # The output is directly to std out
-    analyser$inspect()
+    out <- analyser$inspect()
+    checkTrue(is.null(out))
 }
 
 test.read <- function() {
     prepare()
+    out <- analyser$read()
+    checkTrue(is.null(out))
+    checkTrue(is.data.frame(features_df))
+    checkEquals(561, nrow(features_df))
+    checkEquals(2, ncol(features_df))
+    checkTrue(is.data.frame(activity_labels_df))
+    checkEquals(6, nrow(activity_labels_df))
+    checkEquals(2, ncol(activity_labels_df))
+    checkTrue(is.data.frame(X_train_df))
+    checkEquals(7352, nrow(X_train_df))
+    checkEquals(561, ncol(X_train_df))
+    checkTrue(is.data.frame(y_train_df))
+    checkEquals(7352, nrow(y_train_df))
+    checkEquals(1, ncol(y_train_df))
+    checkTrue(is.data.frame(subject_train_df))
+    checkEquals(7352, nrow(subject_train_df))
+    checkEquals(1, ncol(subject_train_df))
+    checkTrue(is.data.frame(X_test_df))
+    checkEquals(2947, nrow(X_test_df))
+    checkEquals(561, ncol(X_test_df))
+    checkTrue(is.data.frame(y_test_df))
+    checkEquals(2947, nrow(y_test_df))
+    checkEquals(1, ncol(y_test_df))
+    checkTrue(is.data.frame(subject_test_df))
+    checkEquals(2947, nrow(subject_test_df))
+    checkEquals(1, ncol(subject_test_df))
+}
+
+test.combine <- function() {
+    prepare()
     analyser$read()
-    checkTrue(is.data.frame(train_features_df))
-    checkTrue(is.data.frame(test_features_df))
+    out <- analyser$combine()
+    checkTrue(is.null(out))
+    checkTrue(is.data.frame(main_df))
+    checkEquals(10299, nrow(main_df))
+    checkTrue(is.data.frame(person_df))
+    checkEquals(10299, nrow(person_df))
+    checkTrue(is.data.frame(activity_df))
+    checkEquals(10299, nrow(activity_df))
+}
+
+test.merge <- function() {
+    out <- analyser$merge()
+    checkTrue(is.null(out))
+}
+
+test.calculate <- function() {
+    out <- analyser$calculate()
+    checkTrue(is.null(out))
+}
+
+test.report <- function() {
+    out <- analyser$report()
+    checkTrue(is.null(out))
 }
 

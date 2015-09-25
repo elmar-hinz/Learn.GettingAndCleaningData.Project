@@ -28,16 +28,23 @@ do_inspect <- TRUE
 localurl <- "file://./UciHarDataset.zip"
 remoteurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 
-# Directories and files
+# Directories
 unpackdir <- "temp"
 datadir <- "data"
 rawdir <- "data/UciHarDataset"
-zipfile <- "data/UciHarDataset.zip"
 traindir <- "data/UciHarDataset/train"
 testdir <- "data/UciHarDataset/test"
 
-train_features_file <- "data/UciHarDataset/train/X_train.txt"
-test_features_file <- "data/UciHarDataset/test/X_test.txt"
+# Files
+zipfile <- "data/UciHarDataset.zip"
+activity_labels_file <- "data/UciHarDataset/activity_labels.txt"
+features_file <- "data/UciHarDataset/features.txt"
+X_train_file <- "data/UciHarDataset/train/X_train.txt"
+X_test_file <- "data/UciHarDataset/test/X_test.txt"
+y_train_file <- "data/UciHarDataset/train/y_train.txt"
+y_test_file <- "data/UciHarDataset/test/y_test.txt"
+subject_train_file <- "data/UciHarDataset/train/subject_train.txt"
+subject_test_file <- "data/UciHarDataset/test/subject_test.txt"
 
 # number of lines to inspect in each file to detect column count
 nr_inspect <- 5
@@ -190,8 +197,23 @@ Analyser <- function() {
     }
 
     read <- function() {
-        train_features_df <<- read.table(train_features_file)
-        test_features_df <<- read.table(test_features_file)
+        if(!exists('features_df') || fullrun)
+            features_df <<- read.table(features_file)
+        if(!exists('activity_labels_df') || fullrun)
+            activity_labels_df <<- read.table(activity_labels_file)
+        if(!exists('X_train_df') || fullrun)
+           X_train_df <<- read.table(X_train_file)
+        if(!exists('X_test_df') || fullrun)
+            X_test_df <<- read.table(X_test_file)
+        if(!exists('y_train_df') || fullrun)
+            y_train_df <<- read.table(y_train_file)
+        if(!exists('y_test_df') || fullrun)
+            y_test_df <<- read.table(y_test_file)
+        if(!exists('subject_train_df') || fullrun)
+            subject_train_df <<- read.table(subject_train_file)
+        if(!exists('subject_test_df') || fullrun)
+            subject_test_df <<- read.table(subject_test_file)
+        NULL
     }
 
     ##################################################
@@ -199,28 +221,39 @@ Analyser <- function() {
     #
     # @return NULL
     ##
-    combine <- function() {}
+    combine <- function() {
+        main_df <<- rbind(X_train_df, X_test_df)
+        person_df <<- rbind(subject_train_df, subject_test_df)
+        activity_df <<- rbind(y_train_df, y_test_df)
+        NULL
+    }
 
     ##################################################
     # Merge data into one table
     #
     # @return NULL
     ##
-    merge <- function() {}
+    merge <- function() {
+        NULL
+    }
 
     ##################################################
     # Do the required calculations
     #
     # @return NULL
     ##
-    calculate  <- function() {}
+    calculate  <- function() {
+        NULL
+    }
 
     ##################################################
     # Report results into the tidy data file
     #
     # @return NULL
     ##
-    report <- function() {}
+    report <- function() {
+        NULL
+    }
 
     # Finally call the contructor function and return the object list
     construct()
