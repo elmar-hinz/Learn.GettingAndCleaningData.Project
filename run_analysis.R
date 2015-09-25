@@ -21,9 +21,6 @@ fullrun <- FALSE
 # If local is TRUE downlad from local file (faster)
 download_from_local <- TRUE
 
-# Display raw data inspection (takes some time)
-do_inspect <- TRUE
-
 # URLs
 localurl <- "file://./UciHarDataset.zip"
 remoteurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -46,7 +43,7 @@ y_test_file <- "data/UciHarDataset/test/y_test.txt"
 subject_train_file <- "data/UciHarDataset/train/subject_train.txt"
 subject_test_file <- "data/UciHarDataset/test/subject_test.txt"
 
-# number of lines to inspect in each file to detect column count
+# Number of lines to inspect in each file to detect column count
 nr_inspect <- 5
 
 ######################################################################
@@ -79,7 +76,7 @@ Analyser <- function() {
     }
 
     ##################################################
-    # Main functions
+    # Main function
     #
     # Controlls the full process.
     #
@@ -90,9 +87,8 @@ Analyser <- function() {
         setup()
         download()
         unpack()
-        if(do_inspect) inspect(rawdir)
         read()
-        # combine()
+        combine()
         # merge()
         # calculate()
         # report()
@@ -104,12 +100,23 @@ Analyser <- function() {
     #
     # Cleans everything up to prepare a full run if `fullrun` is TRUE.
     #
+    # 1. directories used to process the data
+    # 2. variables caching data frames between non full runs
+    #
     # @return NULL
     ##
     cleanup <- function() {
         if(fullrun) {
             if(file.exists(unpackdir)) unlink(unpackdir, recursive = T)
             if(file.exists(datadir)) unlink(datadir, recursive = T)
+            features_df <<- NULL
+            activity_labels_df <<- NULL
+            X_train_df <<- NULL
+            X_test_df <<- NULL
+            y_train_df <<- NULL
+            y_test_df <<- NULL
+            subject_train_df <<- NULL
+            subject_test_df <<- NULL
         }
         NULL
     }
@@ -196,22 +203,30 @@ Analyser <- function() {
         NULL
     }
 
+    ##################################################
+    # Read all necessary data files
+    #
+    # Reads only if `fullrun` is TRUE or
+    # the data frame variable still don't exits.
+    #
+    # @return NULL
+    ##
     read <- function() {
-        if(!exists('features_df') || fullrun)
+        if(is.null(features_df))
             features_df <<- read.table(features_file)
-        if(!exists('activity_labels_df') || fullrun)
+        if(is.null(activity_labels_df))
             activity_labels_df <<- read.table(activity_labels_file)
-        if(!exists('X_train_df') || fullrun)
-           X_train_df <<- read.table(X_train_file)
-        if(!exists('X_test_df') || fullrun)
+        if(is.null(X_train_df))
+            X_train_df <<- read.table(X_train_file)
+        if(is.null(X_test_df))
             X_test_df <<- read.table(X_test_file)
-        if(!exists('y_train_df') || fullrun)
+        if(is.null(y_train_df))
             y_train_df <<- read.table(y_train_file)
-        if(!exists('y_test_df') || fullrun)
+        if(is.null(y_test_df))
             y_test_df <<- read.table(y_test_file)
-        if(!exists('subject_train_df') || fullrun)
+        if(is.null(subject_train_df))
             subject_train_df <<- read.table(subject_train_file)
-        if(!exists('subject_test_df') || fullrun)
+        if(is.null(subject_test_df))
             subject_test_df <<- read.table(subject_test_file)
         NULL
     }
@@ -219,12 +234,18 @@ Analyser <- function() {
     ##################################################
     # Combine train and test data
     #
+    # Combines by rows.
+    #
+    # 1. X_train_df + X_test_df into main_df
+    # 2. y_train_df + y_test_df into activity_df
+    # 3. subject_train_df + subject_test_df into person_df
+    #
     # @return NULL
     ##
     combine <- function() {
         main_df <<- rbind(X_train_df, X_test_df)
-        person_df <<- rbind(subject_train_df, subject_test_df)
         activity_df <<- rbind(y_train_df, y_test_df)
+        person_df <<- rbind(subject_train_df, subject_test_df)
         NULL
     }
 
