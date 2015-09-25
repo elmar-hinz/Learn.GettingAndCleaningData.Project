@@ -132,10 +132,20 @@ test.combine <- function() {
     checkTrue(is.data.frame(combined_df))
     checkEquals(10299, nrow(combined_df))
     checkEquals(564, ncol(combined_df))
-    checkIdentical(c("index", "person", "activity", "V1"),
-      head(names(combined_df), n=4))
     for(i in 1:3) checkEquals("integer", class(combined_df[,i]))
     for(i in 4:561) checkEquals("numeric", class(combined_df[,i]))
+}
+
+test.setnames <- function() {
+    prepare()
+    analyser$read()
+    analyser$combine()
+    out <- analyser$setnames()
+    checkTrue(is.null(out))
+    checkIdentical(c("index", "person", "activity"),
+        head(names(combined_df), n=3))
+    checkIdentical("tBodyAcc-mean()-X", names(combined_df)[4])
+    checkIdentical("angle(Z,gravityMean)", names(combined_df)[564])
 }
 
 test.merge <- function() {

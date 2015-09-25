@@ -69,6 +69,7 @@ Analyser <- function() {
             inspect = inspect,
             read = read,
             combine = combine,
+            setnames = setnames,
             merge =  merge,
             calculate = calculate,
             report = report
@@ -89,6 +90,7 @@ Analyser <- function() {
         unpack()
         read()
         combine()
+        setnames()
         # merge()
         # calculate()
         # report()
@@ -243,17 +245,7 @@ Analyser <- function() {
     # 2. y_train_df + y_test_df into activities
     # 3. X_train_df + X_test_df into features
     #
-    # Step 2:
-    #
-    # Create a one column data frame named "index"
-    # with integers from 1 to number of rows.
-    #
-    # Step 3:
-    #
-    # Set column names of one column data frames:
-    #    "index", "activity", "person"
-    #
-    # Step 4: cbind()
+    # Step 2: cbind()
     #
     # 1. index
     # 2. persons
@@ -262,10 +254,10 @@ Analyser <- function() {
     #
     # Globally exports combined_df
     #
-    #   column 1: name = index, type = integer
-    #   column 2: name = person, type = integer
-    #   column 3: name = activity, type = integer
-    #   columns 4 - 564: name = V1 - V561, type = numeric
+    #   column 1: type = integer
+    #   column 2: type = integer
+    #   column 3: type = integer
+    #   columns 4 - 564: type = numeric
     #
     # @return NULL
     ##
@@ -274,10 +266,31 @@ Analyser <- function() {
         activities <- rbind(y_train_df, y_test_df)
         persons <- rbind(subject_train_df, subject_test_df)
         index <- data.frame(1:nrow(features))
-        names(index) <- "index"
-        names(activities) <- "activity"
-        names(persons) <- "person"
         combined_df <<- cbind(index, persons, activities, features)
+        NULL
+    }
+
+    ##################################################
+    # Set human readable names (task 4)
+    #
+    # Set column names:
+    #
+    # 1. index
+    # 2. person
+    # 3. activity
+    # 4. "tBodyAcc-mean()-X"
+    # ...
+    # 564.  "angle(Z,gravityMean)"
+    #
+    # Name 4. - 564. are the labels from features_df.
+    # The correct order is checked for.
+    #
+    # @return NULL
+    ##
+    setnames <- function() {
+        stopifnot(identical(1:561, features_df[,1]))
+        names(combined_df) <<- c("index", "person", "activity",
+            as.character(features_df[,2]))
         NULL
     }
 
