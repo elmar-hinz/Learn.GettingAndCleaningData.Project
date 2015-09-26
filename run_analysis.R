@@ -101,13 +101,15 @@ Analyser <- function() {
         setnames() # task 4
         setlabels() # task 3
 
-        # At this point:
+        # At this point we have tidy human readable data:
         #
-        #   1.) all raw data is combined into one data frame.
+        #   1.) All raw data is combined into one data frame.
         #   2.) Names and labels are human readable.
         #   3.) There is one row per observation.
         #   4.) There is one column per variable.
         #   5.) There is an index column.
+        #       (Not used within in this script, but usefull
+        #        to do other tasks with this data frame.)
 
         extract() # task 2
         calculate() # task 5
@@ -269,10 +271,20 @@ Analyser <- function() {
     }
 
     ##################################################
-    # Combine train and test data (task 1)
+    # Combine train and test data
+    #
+    # Task 1:
     #
     # Merges the training and the test sets of interest
     # to create ONE data set: combined_df
+    #
+    # Reasoning:
+    #
+    # This is straight forward. It's not fully documented
+    # in the raw data docs, how everything matches, but the
+    # dimensions of the dataframes give the required hints.
+    #
+    # To inspect dimensions use the functions inspect().
     #
     # Step 1: rbind()
     #
@@ -306,7 +318,17 @@ Analyser <- function() {
     }
 
     ##################################################
-    # Set human readable names (task 4)
+    # Set human readable names
+    #
+    # Task 4:
+    #
+    # Appropriately labels the data set with descriptive variable names.
+    #
+    # Reasoning:
+    #
+    # I find descriptive variable names in features_df.
+    # I use an automated approach in favor of manually setting
+    # names because that's the goal of programming.
     #
     # Set column names to combined_df:
     #
@@ -331,10 +353,20 @@ Analyser <- function() {
     }
 
     ##################################################
-    # Merge activity labels (task 3)
+    # Merge activity labels
     #
-    # Replace the activity integers by activity labels
-    # from activity_labels_df.
+    # Task 3:
+    #
+    # Uses descriptive activity names to name the
+    # activities in the data set.
+    #
+    # Reasoning:
+    #
+    # I find descriptive activity names in activity_labels_df.
+    # I use an automated approach in favor of manually setting
+    # names because that's the goal of programming.
+    #
+    # Replace the activity integers by activity labels.
     #
     # @return NULL
     ##
@@ -349,7 +381,18 @@ Analyser <- function() {
     ##################################################
     # Extract only the measurements on mean and std
     #
+    # Task 2:
+    #
+    # Extracts **only** the measurements on the **mean**
+    # and **standard deviation** for each measurement.
+    #
+    # Reasoning:
+    #
     # The pattern of those names are "mean(" and "std("
+    #
+    # I choose "mean(" over "mean" for one reason,
+    # to show how to escape "(" in pattern.
+    # This results in a more specific selection of columns.
     #
     # Globally exports extracted_df:
     #
@@ -376,24 +419,37 @@ Analyser <- function() {
     # independent tidy data set with the **average** of
     # each variable for each activity AND each subject."
     #
-    # As this is phrased within one sentence and it is
-    # combined by AND, I understand they ask for
+    # Reasoning:
+    #
+    # This is phrased within one sentence and it is
+    # combined by AND. I understand they ask for
     # all possible combinations of a person and it's
-    # activities. To do this, I use two nested for loops.
+    # activities. To solve this, I use two nested for loops.
+    #
+    # Globally exports tidy_df:
+    #
+    #   column 1: person
+    #   column 2: activity
+    #   columns 3 - 68: mean and std measurements
+    #
+    # As the mean of means still is the mean of all elements
+    # there is no reason to change the given column names.
+    # Same for std.
     #
     # @return NULL
     ##
     calculate  <- function() {
-        nc <- ncol(extracted_df)
+        colnum <- ncol(extracted_df)
         persons <- unique(extracted_df$person)
         activities <- unique(extracted_df$activity)
         tidy_df <<- NULL
         for(p in persons) {
             for(a in activities) {
-                rows <- (extracted_df$person == p & extracted_df$activity == a)
-                values <- extracted_df[rows, 4:nc]
+                selection <-
+                    (extracted_df$person == p & extracted_df$activity == a)
+                values <- extracted_df[selection, 4:colnum]
                 means <- lapply(values, mean)
-                result <- cbind( data.frame(person = p, activity = a), means)
+                result <- cbind(data.frame(person = p, activity = a), means)
                 tidy_df <<- rbind(tidy_df, result)
             }
         }
