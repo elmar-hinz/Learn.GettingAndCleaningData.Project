@@ -27,6 +27,15 @@ November 2012.
 
 ## Checklist to Assist Reviewers
 
+Above each function within the code file you find a documentation. Within this
+documentation I give the reasoning for my decisions for each of the required
+steps. This comments are the central documentation.
+
+Primarly have a look to the funtionc `Analyser()$main()` wich explains the
+overall order of the processing.
+
+To view the result data: `View(read.table("tidy_data.txt", header = T))`
+
 1. Has the student submitted a tidy data set?
     1. wide or long?
         * See: https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/tidy_data.txt
@@ -46,6 +55,23 @@ November 2012.
 4. README
     1. Explains what the analysis files did.
         * This file.
+
+In addition to the code file you find a file with unit tests, to show the
+code is working as promised. Run it like this:
+
+```
+    library(RUnit)
+    runTestFile('run_analysis_test.R')
+```
+
+This 3 lines should be the end of the output, if everything works well:
+
+```
+    Number of test functions: 14
+    Number of errors: 0
+    Number of failures: 0
+```
+
 
 ## Project Files
 
