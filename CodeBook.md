@@ -204,3 +204,215 @@ Reasoning:
 
 # The resulting data
 
+[1] person
+        person
+        integer 1 - 3
+
+[2] activity
+        activity
+        string
+           * laying
+           * sitting
+           * standing
+           * walking
+           * walking_downstairs
+           * walking_upstairs
+
+[3] tds_body_acceleration_average_x
+         tds body acceleration average x
+
+[4] tds_body_acceleration_average_y
+         tds body acceleration average y
+
+[5] tds_body_acceleration_average_z
+         tds body acceleration average z
+
+[6] tds_body_acceleration_standard_deviation_x
+         tds body acceleration standard deviation x
+
+[7] tds_body_acceleration_standard_deviation_y
+         tds body acceleration standard deviation y
+
+[8] tds_body_acceleration_standard_deviation_z
+         tds body acceleration standard deviation z
+
+[9] tds_gravity_acceleration_average_x
+         tds gravity acceleration average x
+
+[10] tds_gravity_acceleration_average_y
+         tds gravity acceleration average y
+
+[11] tds_gravity_acceleration_average_z
+         tds gravity acceleration average z
+
+[12] tds_gravity_acceleration_standard_deviation_x
+         tds gravity acceleration standard deviation x
+
+[13] tds_gravity_acceleration_standard_deviation_y
+         tds gravity acceleration standard deviation y
+
+[14] tds_gravity_acceleration_standard_deviation_z
+         tds gravity acceleration standard deviation z
+
+[15] tds_body_acceleration_jerk_average_x
+         tds body acceleration jerk average x
+
+[16] tds_body_acceleration_jerk_average_y
+         tds body acceleration jerk average y
+
+[17] tds_body_acceleration_jerk_average_z
+         tds body acceleration jerk average z
+
+[18] tds_body_acceleration_jerk_standard_deviation_x
+         tds body acceleration jerk standard deviation x
+
+[19] tds_body_acceleration_jerk_standard_deviation_y
+         tds body acceleration jerk standard deviation y
+
+[20] tds_body_acceleration_jerk_standard_deviation_z
+         tds body acceleration jerk standard deviation z
+
+[21] tds_body_gyro_average_x
+         tds body gyro average x
+
+[22] tds_body_gyro_average_y
+         tds body gyro average y
+
+[23] tds_body_gyro_average_z
+         tds body gyro average z
+
+[24] tds_body_gyro_standard_deviation_x
+         tds body gyro standard deviation x
+
+[25] tds_body_gyro_standard_deviation_y
+         tds body gyro standard deviation y
+
+[26] tds_body_gyro_standard_deviation_z
+         tds body gyro standard deviation z
+
+[27] tds_body_gyro_jerk_average_x
+         tds body gyro jerk average x
+
+[28] tds_body_gyro_jerk_average_y
+         tds body gyro jerk average y
+
+[29] tds_body_gyro_jerk_average_z
+         tds body gyro jerk average z
+
+[30] tds_body_gyro_jerk_standard_deviation_x
+         tds body gyro jerk standard deviation x
+
+[31] tds_body_gyro_jerk_standard_deviation_y
+         tds body gyro jerk standard deviation y
+
+[32] tds_body_gyro_jerk_standard_deviation_z
+         tds body gyro jerk standard deviation z
+
+[33] tds_body_acceleration_magnitude_average
+         tds body acceleration magnitude average
+
+[34] tds_body_acceleration_magnitude_standard_deviation
+         tds body acceleration magnitude standard deviation
+
+[35] tds_gravity_acceleration_magnitude_average
+         tds gravity acceleration magnitude average
+
+[36] tds_gravity_acceleration_magnitude_standard_deviation
+         tds gravity acceleration magnitude standard deviation
+
+[37] tds_body_acceleration_jerk_magnitude_average
+         tds body acceleration jerk magnitude average
+
+[38] tds_body_acceleration_jerk_magnitude_standard_deviation
+         tds body acceleration jerk magnitude standard deviation
+
+[39] tds_body_gyro_magnitude_average
+         tds body gyro magnitude average
+
+[40] tds_body_gyro_magnitude_standard_deviation
+         tds body gyro magnitude standard deviation
+
+[41] tds_body_gyro_jerk_magnitude_average
+         tds body gyro jerk magnitude average
+
+[42] tds_body_gyro_jerk_magnitude_standard_deviation
+         tds body gyro jerk magnitude standard deviation
+
+[43] fft_body_acceleration_average_x
+         fft body acceleration average x
+
+[44] fft_body_acceleration_average_y
+         fft body acceleration average y
+
+[45] fft_body_acceleration_average_z
+         fft body acceleration average z
+
+[46] fft_body_acceleration_standard_deviation_x
+         fft body acceleration standard deviation x
+
+[47] fft_body_acceleration_standard_deviation_y
+         fft body acceleration standard deviation y
+
+[48] fft_body_acceleration_standard_deviation_z
+         fft body acceleration standard deviation z
+
+[49] fft_body_acceleration_jerk_average_x
+         fft body acceleration jerk average x
+
+[50] fft_body_acceleration_jerk_average_y
+         fft body acceleration jerk average y
+
+[51] fft_body_acceleration_jerk_average_z
+         fft body acceleration jerk average z
+
+[52] fft_body_acceleration_jerk_standard_deviation_x
+         fft body acceleration jerk standard deviation x
+
+[53] fft_body_acceleration_jerk_standard_deviation_y
+         fft body acceleration jerk standard deviation y
+
+[54] fft_body_acceleration_jerk_standard_deviation_z
+         fft body acceleration jerk standard deviation z
+
+[55] fft_body_gyro_average_x
+         fft body gyro average x
+
+[56] fft_body_gyro_average_y
+         fft body gyro average y
+
+[57] fft_body_gyro_average_z
+         fft body gyro average z
+
+[58] fft_body_gyro_standard_deviation_x
+         fft body gyro standard deviation x
+
+[59] fft_body_gyro_standard_deviation_y
+         fft body gyro standard deviation y
+
+[60] fft_body_gyro_standard_deviation_z
+         fft body gyro standard deviation z
+
+[61] fft_body_acceleration_magnitude_average
+         fft body acceleration magnitude average
+
+[62] fft_body_acceleration_magnitude_standard_deviation
+         fft body acceleration magnitude standard deviation
+
+[63] fft_body_body_acceleration_jerk_magnitude_average
+         fft body body acceleration jerk magnitude average
+
+[64] fft_body_body_acceleration_jerk_magnitude_standard_deviation
+         fft body body acceleration jerk magnitude standard deviation
+
+[65] fft_body_body_gyro_magnitude_average
+         fft body body gyro magnitude average
+
+[66] fft_body_body_gyro_magnitude_standard_deviation
+         fft body body gyro magnitude standard deviation
+
+[67] fft_body_body_gyro_jerk_magnitude_average
+         fft body body gyro jerk magnitude average
+
+[68] fft_body_body_gyro_jerk_magnitude_standard_deviation
+         fft_body_body_gyro_jerk_magnitude_standard_deviation
+
