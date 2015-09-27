@@ -29,15 +29,23 @@ November 2012.
 
 1. Has the student submitted a tidy data set?
     1. wide or long?
-    2. measurs to columns
+        See: https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/tidy_data.txt
+    2. measures to columns
+        * There is one measure per column.
     3. observations to rows
+        * Each row contains the oberservation of an acitivity per user.
 2. Did the student submit a Github repo with the required scripts?
+        * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project
+        * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/run_analysis.R
+        * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/run_analysis_test.R
 3. Was code book submitted to GitHub?
     1. modifies and updates the codebooks available to you
+        * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/CodeBook.md
     2. variables and summaries you calculated
     3. along with units, and any other relevant information
 4. README
     1. Explains what the analysis files did.
+        * This file.
 
 ## Project Files
 
@@ -150,15 +158,15 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * Inspect the files with command lines tools. How do they match together? - DONE
   * `head, tail`
   * `wc -l, wc -w`
-* Describe the raw data within the Codebook - TODO
+* Describe the raw data within the Codebook - DONE
 * Setup stubs `run_analysis.R` and `run_analysis_tests.R` (using Runit). - DONE
 * Add file overview to README. - DONE
 
 ### Codebook
 
-* The goals - TODO
+* The goals - DONE
 * The raw data - DONE
-* The processing steps - TODO
+* The processing steps - DONE
 * The resulting data - TODO
 
 ### Coding and Testing Side by Side
@@ -175,7 +183,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * extract mean and standard deviations (2.) - DONE
 * merge tables with activity labels (3.) - DONE
 * add descriptive variable names (4.) - DONE
-* do 5.
+* do 5. - DONE
     * create independent tidy dataset
     * average of each variable from 4. per activity per subject
 
@@ -190,7 +198,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 
 ### Finally
 
-* Check exists: - TODO
+* Check exists: - DONE
     1. Readme.md
     2. codebook.md
     3. run_analysis.R
@@ -199,5 +207,5 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * Check the checklist for reviewers links to all.
 * Check everything marked as TODO - TODO
 * Final push to Github - TODO
-* Submit to Coursera - TODO
+* Submit to Coursera - DONE
 
