@@ -462,7 +462,7 @@ Analyser <- function() {
     # @return NULL
     ##
     report <- function() {
-        write.table(tidy_df, result_file)
+        write.table(tidy_df, result_file, row.name = F)
         NULL
     }
 
