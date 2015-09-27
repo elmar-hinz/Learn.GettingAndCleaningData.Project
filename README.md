@@ -29,15 +29,15 @@ November 2012.
 
 1. Has the student submitted a tidy data set?
     1. wide or long?
-        See: https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/tidy_data.txt
+        * See: https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/tidy_data.txt
     2. measures to columns
         * There is one measure per column.
     3. observations to rows
         * Each row contains the oberservation of an acitivity per user.
 2. Did the student submit a Github repo with the required scripts?
-        * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project
-        * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/run_analysis.R
-        * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/run_analysis_test.R
+    * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project
+    * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/run_analysis.R
+    * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/run_analysis_test.R
 3. Was code book submitted to GitHub?
     1. modifies and updates the codebooks available to you
         * https://github.com/elmar-hinz/Learn.GettingAndCleaningData.Project/blob/master/CodeBook.md
@@ -49,15 +49,13 @@ November 2012.
 
 ## Project Files
 
-TODO: Final check.
-
 1. `README.md`: This file. Users guide.
 2. `UciHarDataset.zip`: The raw data.
 3. `CodeBook.md`: Describing the processing of the data.
 4. `run_analysis.R`: The data processing script.
 5. `run_analysis_test.R`: Unit tests for the previous script.
 6. `LICENSE.txt`: MIT Licencense covering the code.
-7. `tidyDataResult.txt`: The data output of this project.
+7. `tidy_data.txt`: The data output of this project.
 
 ## Given Project Instructions
 
@@ -145,11 +143,11 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 
 * Read the given tasks - DONE
 * Setup a Github repository with stubs for Readme,  License, Codebook - DONE
-    * Grow this documents while working along. - TODO
-    * Do regular `git commit` - TODO
+    * Grow this documents while working along. - DONE
+    * Do regular `git commit` - DONE
 * Visit the reviewers checkpoints on Coursera - DONE
     * Note them to Readme - DONE
-    * Set hyperlinks for all points - TODO
+    * Set hyperlinks for all points - DONE
 * Read the posting **A really long advice thread for the Project**
   by David Hood - DONE
     * Take notes to the Readme. - DONE
@@ -167,7 +165,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 * The goals - DONE
 * The raw data - DONE
 * The processing steps - DONE
-* The resulting data - TODO
+* The resulting data - DONE
 
 ### Coding and Testing Side by Side
 
@@ -189,11 +187,11 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 
 ### Document
 
-* Finalize the Codebook. - TODO
-* Finalize the Readme. - TODO
+* Finalize the Codebook. - DONE
+* Finalize the Readme. - DONE
 * Finalize code comments. - DONE
-* Anything else? - TODO
-* Revisit the reviewers checkpoints in the Readme - TODO
+* Anything else? - DONE
+* Revisit the reviewers checkpoints in the Readme - DONE
     * Document in wich files to find the solutions to assist the reviewer.
 
 ### Finally
@@ -205,7 +203,7 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
     4. tidy data text file
 
 * Check the checklist for reviewers links to all.
-* Check everything marked as TODO - TODO
-* Final push to Github - TODO
+* Check everything marked as TODO - DONE
+* Final push to Github - DONE
 * Submit to Coursera - DONE
 
