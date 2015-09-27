@@ -201,6 +201,7 @@ test.calculate <- function() {
     analyser$setnames()
     analyser$setlabels()
     analyser$extract()
+    analyser$expandnames()
     out <- analyser$calculate()
     checkTrue(is.null(out))
     checkIdentical(c("person", "activity"), head(names(tidy_df), n=2))
@@ -216,9 +217,13 @@ test.report <- function() {
     analyser$setnames()
     analyser$setlabels()
     analyser$extract()
+    analyser$expandnames()
     analyser$calculate()
     out <- analyser$report()
     checkTrue(is.null(out))
     checkTrue(file.exists(result_file))
+    # check round trip
+    df <- read.table(result_file, header = T)
+    checkEquals(df, tidy_df, tolerance = 0.00001)
 }
 
