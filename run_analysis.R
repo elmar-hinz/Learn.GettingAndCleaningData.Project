@@ -16,7 +16,7 @@ require(stringr)
 ######################################################################
 
 # Do a fullrun including download from remote or local
-fullrun <- FALSE
+fullrun <- TRUE
 
 # If local is TRUE downlad from local file (faster)
 download_from_local <- TRUE
