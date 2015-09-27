@@ -73,6 +73,7 @@ Analyser <- function() {
             setnames = setnames,
             setlabels =  setlabels,
             extract = extract,
+            expandnames = expandnames,
             calculate = calculate,
             report = report
          )
@@ -95,23 +96,26 @@ Analyser <- function() {
         read()
 
         # It's not required to do the tasks in the given order.
-        # I want to reach a human readable df as soon as possible.
+        # I want to reach a human readable df as soon as possible
+        # even if this for one reason only, to assist myself.
 
         combine() # task 1
-        setnames() # task 4
+        setnames() # task 4 part 1
         setlabels() # task 3
 
         # At this point we have tidy human readable data:
         #
         #   1.) All raw data is combined into one data frame.
-        #   2.) Names and labels are human readable.
-        #   3.) There is one row per observation.
-        #   4.) There is one column per variable.
-        #   5.) There is an index column.
+        #   2.) Names are human readable but still strongly abbreviated.
+        #   3.) Labels are human readable but all still upper case.
+        #   4.) There is one row per observation.
+        #   5.) There is one column per variable.
+        #   6.) There is an index column.
         #       (Not used within in this script, but usefull
         #        to do other tasks with this data frame.)
 
         extract() # task 2
+        expandnames() # task 4 part 2
         calculate() # task 5
         report() # write the tidy dataset
         NULL
@@ -320,7 +324,7 @@ Analyser <- function() {
     ##################################################
     # Set human readable names
     #
-    # Task 4:
+    # Task 4 part 1:
     #
     # Appropriately labels the data set with descriptive variable names.
     #
@@ -357,22 +361,25 @@ Analyser <- function() {
     #
     # Task 3:
     #
-    # Uses descriptive activity names to name the
-    # activities in the data set.
+    # Use descriptive activity names to name the activities in the data set.
     #
     # Reasoning:
     #
     # I find descriptive activity names in activity_labels_df.
+    # They become more readable when I turn them to lower case.
+    #
     # I use an automated approach in favor of manually setting
     # names because that's the goal of programming.
     #
-    # Replace the activity integers by activity labels.
+    # Replace the activity integers by activity labels switched to lower.
     #
     # @return NULL
     ##
     setlabels <- function() {
         # get a vector of labels sorted by index of activity_labels_df
         labels <- activity_labels_df[order(activity_labels_df[1]), ][,2]
+        # turn to lower but keep it a factor
+        labels <- as.factor(tolower(labels))
         # apply the labels
         combined_df$activity <<- labels[combined_df$activity]
         NULL
@@ -411,6 +418,64 @@ Analyser <- function() {
     }
 
     ##################################################
+    # Expand the abbreviated names
+    #
+    # Task 4 part 2:
+    #
+    # Appropriately labels the data set with descriptive variable names.
+    #
+    # Reasoning:
+    #
+    # The names are still abbraviations. By expanding them I come
+    # to descriptive variable names.
+    #
+    # On the other hand shortness has value of it's own for readability.
+    # I have to find a compromise.
+    #
+    # To keep the full lenght a little shorter I decide to
+    # stay with 3 letter acronyms for the first part.
+    #
+    # * FFT: An established acronym for Fast Fourrier Transformation.
+    # * TDS: Time Domain Signal for reasons of symmetry of names.
+    #
+    # Additionally a assume that it is immediatly obvious to everybody
+    # in the field of science that x, y, z is standing for dimensions
+    # without explicitly applying the term dimension.
+    #
+    # I choose all lower case, because not all software differs
+    # lower and upper case. That is specially important with
+    # column names in databases.
+    #
+    # To divide the parts of names I use underscore for similar
+    # reasons, an established compromise between human and machine
+    # readability.
+    #
+    # All other special characters are removed.
+    #
+    # @return NULL
+    ##
+    expandnames <- function() {
+        nms <- names(extracted_df)
+        nms <- gsub(perl = T, "^t", "tds_", nms)
+        nms <- gsub(perl = T, "^f", "fft_", nms)
+        nms <- gsub(perl = T, "Body", "body_", nms)
+        nms <- gsub(perl = T, "Gravity", "gravity_", nms)
+        nms <- gsub(perl = T, "Gyro", "gyro_", nms)
+        nms <- gsub(perl = T, "Acc", "acceleration_", nms)
+        nms <- gsub(perl = T, "Jerk", "jerk_", nms)
+        nms <- gsub(perl = T, "Mag", "magnitude_", nms)
+        nms <- gsub(perl = T, "mean\\(\\)", "average_", nms)
+        nms <- gsub(perl = T, "std\\(\\)", "standard_deviation_", nms)
+        nms <- gsub(perl = T, "X$", "x", nms)
+        nms <- gsub(perl = T, "Y$", "y", nms)
+        nms <- gsub(perl = T, "Z$", "z", nms)
+        nms <- gsub(perl = T, "-", "", nms)
+        nms <- gsub(perl = T, "_$", "", nms)
+        names(extracted_df) <<- nms
+        NULL
+    }
+
+    ##################################################
     # Do the required calculations
     #
     # Task 5:
@@ -440,8 +505,8 @@ Analyser <- function() {
     ##
     calculate  <- function() {
         colnum <- ncol(extracted_df)
-        persons <- unique(extracted_df$person)
-        activities <- unique(extracted_df$activity)
+        persons <- sort(unique(extracted_df$person))
+        activities <- sort(unique(extracted_df$activity))
         tidy_df <<- NULL
         for(p in persons) {
             for(a in activities) {

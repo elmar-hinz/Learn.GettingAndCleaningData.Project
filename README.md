@@ -189,11 +189,11 @@ Source: https://class.coursera.org/getdata-032/forum/thread?thread_id=26
 
 ### Document
 
-* Finalize the Codebook.
-* Finalize the Readme.
-* Finalize code comments.
-* Anything else?
-* Revisit the reviewers checkpoints in the Readme
+* Finalize the Codebook. - TODO
+* Finalize the Readme. - TODO
+* Finalize code comments. - DONE
+* Anything else? - TODO
+* Revisit the reviewers checkpoints in the Readme - TODO
     * Document in wich files to find the solutions to assist the reviewer.
 
 ### Finally

@@ -157,9 +157,9 @@ test.setlabels <- function() {
     out <- analyser$setlabels()
     checkTrue(is.null(out))
     checkTrue(is.factor(combined_df$activity))
-    checkEquals("STANDING", as.character(combined_df$activity[1]))
-    checkEquals("SITTING", as.character(combined_df$activity[28]))
-    checkEquals("LAYING", as.character(combined_df$activity[52]))
+    checkEquals("standing", as.character(combined_df$activity[1]))
+    checkEquals("sitting", as.character(combined_df$activity[28]))
+    checkEquals("laying", as.character(combined_df$activity[52]))
 }
 
 test.extract <- function() {
@@ -177,6 +177,21 @@ test.extract <- function() {
         head(names(extracted_df), n=3))
     checkIdentical("tBodyAcc-mean()-X", names(extracted_df)[4])
     checkIdentical("fBodyBodyGyroJerkMag-std()", names(extracted_df)[69])
+}
+
+test.expandnames <- function() {
+    prepare()
+    analyser$read()
+    analyser$combine()
+    analyser$setnames()
+    analyser$setlabels()
+    analyser$extract()
+    out <- analyser$expandnames()
+    checkTrue(is.null(out))
+    checkEquals("tds_body_acceleration_average_x",
+        names(extracted_df)[4])
+    checkEquals("fft_body_body_gyro_jerk_magnitude_standard_deviation",
+        names(extracted_df)[69])
 }
 
 test.calculate <- function() {
