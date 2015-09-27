@@ -32,7 +32,7 @@ prepare <- function() {
 }
 
 test.configuration <- function() {
-    checkTrue(is.logical(c(fullrun, download_from_local, do_inspect)))
+    checkTrue(is.logical(c(fullrun, download_from_local)))
     checkTrue(is.character(c(
         localurl, remoteurl,
         unpackdir, datadir, rawdir, zipfile, traindir, testdir,
