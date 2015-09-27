@@ -72,6 +72,8 @@ This 3 lines should be the end of the output, if everything works well:
     Number of failures: 0
 ```
 
+Warning: This may delete the file `tidy_data.txt` as the order of the
+unit tests is not defined.
 
 ## Project Files
 
