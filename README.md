@@ -73,7 +73,11 @@ This 3 lines should be the end of the output, if everything works well:
 ```
 
 Warning: This may delete the file `tidy_data.txt` as the order of the
-unit tests is not defined.
+unit tests is not defined. To regenerate it you want to run:
+
+```
+    source("run_analysis.R"); Analyser()$main()
+```
 
 ## Project Files
 
