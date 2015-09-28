@@ -27,6 +27,10 @@ November 2012.
 
 ## Checklist to Assist Reviewers
 
+**Note**: This repository has tiny modifications that are done after the
+deadline. If you like to review the exact commit at the deadline, this is
+ff1321c7f194764095ee1e357718e1025f17995b, **fixing error in file type**.
+
 Above each function within the code file you find a documentation. Within this
 documentation I give the reasoning for my decisions for each of the required
 steps. This comments are the central documentation.
