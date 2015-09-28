@@ -67,7 +67,7 @@ code is working as promised. Run it like this:
 This 3 lines should be the end of the output, if everything works well:
 
 ```
-    Number of test functions: 14
+    Number of test functions: 15
     Number of errors: 0
     Number of failures: 0
 ```

@@ -73,6 +73,7 @@ Analyser <- function() {
             setnames = setnames,
             setlabels =  setlabels,
             extract = extract,
+            fixtypos = fixtypos,
             expandnames = expandnames,
             calculate = calculate,
             report = report
@@ -115,6 +116,7 @@ Analyser <- function() {
         #        to do other tasks with this data frame.)
 
         extract() # task 2
+        fixtypos() # is cleaning data
         expandnames() # task 4 part 2
         calculate() # task 5
         report() # write the tidy dataset
@@ -414,6 +416,20 @@ Analyser <- function() {
         pattern <- "mean\\(|std\\("
         positions <- grep(pattern, names(combined_df))
         extracted_df <<- combined_df[,c(1:3, positions)]
+        NULL
+    }
+
+    ##################################################
+    # Fix typos in varible names
+    #
+    # In some varible names "Body" is doubled to "BodyBody".
+    #
+    # @return NULL
+    ##
+    fixtypos <- function() {
+        nms <- names(extracted_df)
+        nms <- gsub(perl = T, "BodyBody", "Body", nms)
+        names(extracted_df) <<- nms
         NULL
     }
 

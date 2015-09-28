@@ -583,39 +583,39 @@ Reasoning:
     * Class: numeric
     * Range: -0.987648484461539 - 0.178684580868889
 
-[63] fft_body_body_acceleration_jerk_magnitude_average
+[63] fft_body_acceleration_jerk_magnitude_average
 
-    * Name: Fast Fourrier Transformation Body Body Acceleration Jerk Magnitude Average
+    * Name: Fast Fourrier Transformation Body Acceleration Jerk Magnitude Average
     * Class: numeric
     * Range: -0.993998275797101 - 0.538404846128205
 
-[64] fft_body_body_acceleration_jerk_magnitude_standard_deviation
+[64] fft_body_acceleration_jerk_magnitude_standard_deviation
 
-    * Name: Fast Fourrier Transformation Body Body Acceleration Jerk Magnitude Standard Deviation
+    * Name: Fast Fourrier Transformation Body Acceleration Jerk Magnitude Standard Deviation
     * Class: numeric
     * Range: -0.994366667681159 - 0.316346415348718
 
-[65] fft_body_body_gyro_magnitude_average
+[65] fft_body_gyro_magnitude_average
 
-    * Name: Fast Fourrier Transformation Body Body Gyro Magnitude Average
+    * Name: Fast Fourrier Transformation Body Gyro Magnitude Average
     * Class: numeric
     * Range: -0.986535242105263 - 0.203979764835897
 
-[66] fft_body_body_gyro_magnitude_standard_deviation
+[66] fft_body_gyro_magnitude_standard_deviation
 
-    * Name: Fast Fourrier Transformation Body Body Gyro Magnitude Standard Deviation
+    * Name: Fast Fourrier Transformation Body Gyro Magnitude Standard Deviation
     * Class: numeric
     * Range: -0.981468841692308 - 0.236659662496296
 
-[67] fft_body_body_gyro_jerk_magnitude_average
+[67] fft_body_gyro_jerk_magnitude_average
 
-    * Name: Fast Fourrier Transformation Body Body Gyro Jerk Magnitude Average
+    * Name: Fast Fourrier Transformation Body Gyro Jerk Magnitude Average
     * Class: numeric
     * Range: -0.997617389275362 - 0.146618569064407
 
-[68] fft_body_body_gyro_jerk_magnitude_standard_deviation
+[68] fft_body_gyro_jerk_magnitude_standard_deviation
 
-    * Name: Fast Fourrier Transformation Body Body Gyro Jerk Magnitude Standard Deviation
+    * Name: Fast Fourrier Transformation Body Gyro Jerk Magnitude Standard Deviation
     * Class: numeric
     * Range: -0.99758523057971 - 0.287834616098305
 

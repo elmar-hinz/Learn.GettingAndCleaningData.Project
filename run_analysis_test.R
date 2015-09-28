@@ -179,6 +179,23 @@ test.extract <- function() {
     checkIdentical("fBodyBodyGyroJerkMag-std()", names(extracted_df)[69])
 }
 
+test.fixtypos <- function() {
+    prepare()
+    analyser$read()
+    analyser$combine()
+    analyser$setnames()
+    analyser$setlabels()
+    analyser$extract()
+    positions <- grep('BodyBody', names(extracted_df))
+    checkEquals(64:69, positions)
+    out <- analyser$fixtypos()
+    checkTrue(is.null(out))
+    positions <- grep('BodyBody', names(extracted_df))
+    checkEquals(0, length(positions))
+    print(names(extracted_df)[64])
+    checkEquals("fBodyAccJerkMag-mean()", names(extracted_df)[64])
+}
+
 test.expandnames <- function() {
     prepare()
     analyser$read()
@@ -186,11 +203,12 @@ test.expandnames <- function() {
     analyser$setnames()
     analyser$setlabels()
     analyser$extract()
+    analyser$fixtypos()
     out <- analyser$expandnames()
     checkTrue(is.null(out))
     checkEquals("tds_body_acceleration_average_x",
         names(extracted_df)[4])
-    checkEquals("fft_body_body_gyro_jerk_magnitude_standard_deviation",
+    checkEquals("fft_body_gyro_jerk_magnitude_standard_deviation",
         names(extracted_df)[69])
 }
 
@@ -201,6 +219,7 @@ test.calculate <- function() {
     analyser$setnames()
     analyser$setlabels()
     analyser$extract()
+    analyser$fixtypos()
     analyser$expandnames()
     out <- analyser$calculate()
     checkTrue(is.null(out))
@@ -217,6 +236,7 @@ test.report <- function() {
     analyser$setnames()
     analyser$setlabels()
     analyser$extract()
+    analyser$fixtypos()
     analyser$expandnames()
     analyser$calculate()
     out <- analyser$report()
