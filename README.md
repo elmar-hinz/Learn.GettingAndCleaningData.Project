@@ -57,12 +57,14 @@ To view the result data: `View(read.table("tidy_data.txt", header = T))`
         * This file.
 
 In addition to the code file you find a file with unit tests, to show the
-code is working as promised. Run it like this:
+code is working as promised. Run it **TWICE** like this:
 
 ```
     library(RUnit)
     runTestFile('run_analysis_test.R')
 ```
+
+The first run will fail but load the required dataframes.
 
 This 3 lines should be the end of the output, if everything works well:
 
